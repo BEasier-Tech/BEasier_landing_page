@@ -19,7 +19,6 @@ import { Helmet } from "react-helmet-async";
 import ReactPlayer from "react-player";
 import {
   Banner,
-  HeroBadge,
   PlansCTA,
   ContactContainer,
   ContactInfo,
@@ -37,6 +36,9 @@ import {
   InstagramSection,
   Segments,
   Solutions,
+  SupportSection,
+  FeatureHub,
+  EcosystemSection,
 } from "./styles";
 
 // Import the carousel styles
@@ -46,12 +48,143 @@ const Home: FunctionComponent = () => {
   const formRef = useRef<FormHandles>(null);
   const viewedSections = useRef(new Set<string>());
 
-  // Estado do carrossel
+  // Estado do carrossel e abas de funcionalidades
   const [currentSegmentIndex, setCurrentSegmentIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(1);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [activeFeatureTab, setActiveFeatureTab] = useState(0);
 
   console.log(isAutoPlaying);
+
+  // Pilares de Funcionalidades (Hub de Soluções Estilo AgendaPro)
+  const featurePillars = [
+    {
+      id: "agendamento",
+      icon: "📅",
+      tabTitle: "Agendamento 24/7",
+      tag: "Agenda Online & Link da Bio",
+      title: "Deixe seus clientes agendarem sozinhos 24 horas por dia",
+      description: "Esqueça o atendimento manual no WhatsApp. Disponibilize seu link personalizado no Instagram e permita que clientes agendem serviços a qualquer momento.",
+      checklist: [
+        "Link de agendamentos próprio para redes sociais",
+        "Confirmação e lembretes automáticos anti-faltas no WhatsApp",
+        "Agenda sincronizada por profissional e sala",
+        "Bloqueio de horários e feriados personalizado",
+      ],
+      previewTitle: "Agenda do Dia • Salão & Studio",
+      previewStatus: "🟢 82% Ocupada",
+      previewItems: [
+        { name: "Corte + Escova (Fernanda S.)", val: "14:00 - Confirmado" },
+        { name: "Manicure (Camila M.)", val: "15:30 - WhatsApp Enviado" },
+        { name: "Barba + Cabelo (Lucas P.)", val: "17:00 - Confirmado" },
+      ],
+    },
+    {
+      id: "crm",
+      icon: "👥",
+      tabTitle: "Gestão de Clientes CRM",
+      tag: "Histórico & Preferências",
+      title: "Conheça o histórico completo e fidelize cada cliente",
+      description: "Tenha a ficha detalhada dos seus clientes com histórico de procedimentos realizados, preferências, datas comemorativas e dados de contato.",
+      checklist: [
+        "Ficha do cliente com fotos e observações",
+        "Histórico de serviços consumidos e valores",
+        "Mensagens automáticas de aniversário e retorno",
+        "Cadastro rápido e exportação segura",
+      ],
+      previewTitle: "Ficha do Cliente • Maria Oliveira",
+      previewStatus: "⭐ Cliente VIP",
+      previewItems: [
+        { name: "Última Visita", val: "12/07/2026 (Mechas)" },
+        { name: "Frequência Média", val: "A cada 21 dias" },
+        { name: "Gasto Total", val: "R$ 1.450,00" },
+      ],
+    },
+    {
+      id: "estoque",
+      icon: "📦",
+      tabTitle: "Estoque & Insumos",
+      tag: "Controle de Produtos",
+      title: "Controle de estoque automático e alerta de insumos",
+      description: "Evite falta de produtos na bancada. Controle o uso interno de insumos e a venda de produtos diretamente na recepção.",
+      checklist: [
+        "Baixa automática ao vender ou utilizar no serviço",
+        "Alerta de estoque mínimo para reposição",
+        "Relatório de lucratividade por produto",
+        "Gestão de fornecedores e custos",
+      ],
+      previewTitle: "Estoque em Tempo Real",
+      previewStatus: "📦 45 Itens",
+      previewItems: [
+        { name: "Shampoo Pós-Química 500ml", val: "12 un (OK)" },
+        { name: "Óleo Reparador de Pontas", val: "2 un (Alerta Mínimo)" },
+        { name: "Tinta Louro Claríssimo", val: "8 un (OK)" },
+      ],
+    },
+    {
+      id: "marketing",
+      icon: "📢",
+      tabTitle: "Marketing & Bio",
+      tag: "Atração & Retenção",
+      title: "Transforme seguidores em clientes fiéis com o Link da Bio",
+      description: "Atraia mais clientes divulgando seu catálogo de serviços e fotos de trabalhos de forma elegante no Instagram, WhatsApp e Google.",
+      checklist: [
+        "Página de apresentação profissional do estabelecimento",
+        "Catálogo de serviços com fotos e preços",
+        "Google Meu Negócio & Link no WhatsApp",
+        "Promoções e cupons de desconto",
+      ],
+      previewTitle: "Página de Agendamento Online",
+      previewStatus: "🚀 Ativa 24h",
+      previewItems: [
+        { name: "Visualizações da Página", val: "+1.240 este mês" },
+        { name: "Agendamentos Convertidos", val: "184 agendamentos" },
+        { name: "Taxa de Conversão", val: "38.5%" },
+      ],
+    },
+    {
+      id: "pagamentos",
+      icon: "💳",
+      tabTitle: "Pagamentos & Caixa",
+      tag: "Financeiro & Comissões",
+      title: "Cálculo automático de comissões e fechamento de caixa fácil",
+      description: "Elimine planilhas complicadas no fim do mês. O sistema calcula a comissão de cada profissional automaticamente após o atendimento.",
+      checklist: [
+        "Cálculo automático de comissão por serviço e produto",
+        "Fechamento de caixa diário sem divergências",
+        "Registro de métodos de pagamento (Pix, Cartão, Dinheiro)",
+        "Controle de contas a pagar e receber",
+      ],
+      previewTitle: "Resumo Financeiro do Dia",
+      previewStatus: "💰 Caixa Aberto",
+      previewItems: [
+        { name: "Faturamento Bruto", val: "R$ 2.340,00" },
+        { name: "Comissões da Equipe", val: "R$ 936,00 (40%)" },
+        { name: "Lucro Líquido", val: "R$ 1.404,00" },
+      ],
+    },
+    {
+      id: "relatorios",
+      icon: "📈",
+      tabTitle: "Relatórios & Métricas",
+      tag: "Análise 360°",
+      title: "Tome decisões inteligentes com relatórios claros e completos",
+      description: "Acompanhe o faturamento, ticket médio, serviços mais vendidos e desempenho dos profissionais em gráficos fáceis de entender.",
+      checklist: [
+        "Dashboard com métricas em tempo real",
+        "Relatórios de serviços mais rentáveis",
+        "Comparativo de faturamento mensal e anual",
+        "Exportação simplificada para contabilidade",
+      ],
+      previewTitle: "Desempenho Geral",
+      previewStatus: "📈 +32% vs Mês Anterior",
+      previewItems: [
+        { name: "Ticket Médio por Cliente", val: "R$ 145,00" },
+        { name: "Serviço Mais Vendido", val: "Corte + Barba" },
+        { name: "Profissional Destaque", val: "Lucas (48 atendimentos)" },
+      ],
+    },
+  ];
 
   // Atualizar itens por página baseado no tamanho da tela
   useEffect(() => {
@@ -73,64 +206,100 @@ const Home: FunctionComponent = () => {
   // Dados dos segmentos
   const segments = [
     {
+      icon: "💈",
       image:
         "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&h=300&fit=crop&crop=center",
       alt: "Barbearia",
       title: "Barbearia",
       description:
-        "Você vai liberar tempo na sua rotina para vender mais com um sistema para agendamentos para barbearia, gerenciamento de equipe, controle de estoque, lembretes antes do agendamento para fidelizar os seus clientes e app para barbeiros.",
+        "Liberte-se do atendimento manual no WhatsApp. Sistema com agendamento online via Link da Bio, gestão de comissão dos barbeiros, controle de estoque e lembretes automáticos anti-falta.",
       features: [
-        "Controle de agenda online",
-        "App para profissionais",
-        "Lembrete para clientes no whatsApp",
+        "Agenda online 24h via Link da Bio",
+        "App exclusivo para barbeiros",
+        "Lembretes automáticos via WhatsApp",
       ],
       link: "/barbearia",
       linkText: "Soluções para barbearias",
     },
     {
+      icon: "💇‍♀️",
       image:
         "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=300&fit=crop&crop=center",
       alt: "Salão de beleza",
       title: "Salão de beleza",
       description:
-        "Seja qual for o tamanho do seu salão de beleza, tenha total controle dos agendamentos, gerencie seus profissionais, fidelize seus clientes e ganhe tempo automatizando a sua gestão.",
+        "Gerencie múltiplos profissionais, serviços simultâneos, cálculo automático de comissões por procedimento e venda de produtos em um único aplicativo simples e intuitivo.",
       features: [
-        "Controle de agenda online",
-        "Cálculo e pagamento de comissões",
-        "Fluxo de caixa",
+        "Agenda de múltiplos profissionais",
+        "Cálculo automático de comissões",
+        "Fluxo de caixa e faturamento",
       ],
       link: "/salao-estetica",
       linkText: "Soluções para salões de beleza",
     },
     {
+      icon: "💅",
+      image:
+        "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&h=300&fit=crop&crop=center",
+      alt: "Esmalterias & Unhas",
+      title: "Esmalterias & Unhas",
+      description:
+        "Organize os horários das manicures e pedicures, ofereça pacotes de sessões recorrentes e automatize a confirmação de presença para evitar horários vagos.",
+      features: [
+        "Gestão de pacotes e sessões",
+        "Confirmação automática de horário",
+        "Histórico e preferências do cliente",
+      ],
+      link: "/salao-estetica",
+      linkText: "Soluções para esmalterias",
+    },
+    {
+      icon: "💆‍♀️",
       image:
         "https://images.unsplash.com/photo-1616391182219-e080b4d1043a?w=400&h=300&fit=crop&crop=center",
       alt: "Clínica de Estética",
       title: "Clínica de Estética",
       description:
-        "Faça a gestão dos seus profissionais e atraia mais clientes para a sua clínica de estética com ferramentas de comunicação e marketing exclusivas, criação de pacotes.",
+        "Atraia e fidelize mais clientes com fichas detalhadas, pacotes de procedimentos estéticos e controle de insumos e produtos utilizados nos tratamentos.",
       features: [
-        "Gestão de pacotes",
-        "Histórico de clientes",
-        "Controle de estoque",
+        "Gestão de pacotes estéticos",
+        "Ficha do cliente e histórico",
+        "Controle de estoque de insumos",
       ],
       link: "/salao-estetica",
       linkText: "Soluções para clínicas de estética",
     },
     {
+      icon: "👁️",
+      image:
+        "https://images.unsplash.com/photo-1583001809873-a1284d5f3d64?w=400&h=300&fit=crop&crop=center",
+      alt: "Lash & Sobrancelhas",
+      title: "Lash & Sobrancelhas",
+      description:
+        "Valorize seu trabalho com uma página profissional de agendamentos 24/7, controle de manutenções e avisos automáticos de retorno para suas clientes.",
+      features: [
+        "Página de agendamento 24/7",
+        "Avisos automáticos de manutenção",
+        "Recebimento e gestão simplificada",
+      ],
+      link: "/salao-estetica",
+      linkText: "Soluções para Lash & Sobrancelhas",
+    },
+    {
+      icon: "👤",
       image:
         "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=400&h=300&fit=crop&crop=center",
       alt: "Profissionais Autônomos",
       title: "Profissionais Autônomos",
       description:
-        "Organize sua agenda, fidelize clientes e profissionalize seu atendimento com ferramentas especializadas para profissionais autônomos da área de beleza e bem-estar.",
+        "Tenha uma gestão profissional na palma da mão sem pagar fortunas. Agenda rápida, relatórios simples e link personalizado para compartilhar nas redes sociais.",
       features: [
-        "Agenda personalizada",
-        "Gestão financeira",
-        "Marketing digital",
+        "Agenda móvel no celular",
+        "Link exclusivo para redes sociais",
+        "Relatório simples de receita diária",
       ],
       link: "/solution",
-      linkText: "barbearia",
+      linkText: "Soluções para autônomos",
     },
   ];
 
@@ -411,45 +580,34 @@ const Home: FunctionComponent = () => {
 
           <Banner id="start">
             <div className="content">
-              <a href="/preco" className="badge-link">
-                <HeroBadge>
-                  <span className="emoji">⚡️</span>
-                  <span>Teste Grátis por 20 dias —</span>
-                  <span className="highlight">Sem Cartão de Crédito</span>
-                </HeroBadge>
-              </a>
-              <h1 className="title">Gestão inteligente para o seu negócio</h1>
+              <div className="rating-badge">
+                <span className="stars">★★★★★</span>
+                <span><b>4.9/5</b> por +500 estabelecimentos no Brasil</span>
+              </div>
+              <h1 className="title">
+                Organize agendamentos, cobre sem fricção e <span className="highlight-text">faça seu negócio crescer</span>
+              </h1>
               <div className="subtitle">
-                Simplifique seus agendamentos e organize comissões com
-                facilidade. Gerencie tudo em um app e veja sua receita decolar!
+                Faça simples. Faça com o <span>Gestão Boa</span>. O sistema completo de agendamento online, comissões automáticas e gestão financeira para beleza e bem-estar.
               </div>
 
               <div className="buttons">
                 <a
                   className="button button-link"
                   href="/preco"
-                  title="TESTAR GRÁTIS"
+                  title="Crie sua conta grátis"
                 >
                   <Button
                     width="100%"
-                    text="TESTAR GRÁTIS!"
+                    text="CRIE SUA CONTA GRÁTIS"
                     method={() => {}}
                     type={"focused"}
                   />
                 </a>
-                <a
-                  className="button button-link"
-                  href="/solucao"
-                  title="SAIBA MAIS"
-                >
-                  <Button
-                    width="99%"
-                    text="SAIBA MAIS"
-                    method={() => {}}
-                    type={"unfocused"}
-                  />
-                </a>
               </div>
+              <span className="hero-subtext">
+                ⚡ Teste grátis por 20 dias — Sem cartão de crédito
+              </span>
             </div>
             <div className="images">
               <img
@@ -458,7 +616,7 @@ const Home: FunctionComponent = () => {
                 alt="Aplicativo Gestão Boa em smartphone mostrando interface de gestão"
                 loading="eager"
                 width="300"
-                height="600"
+                height="500"
               />
               <img
                 className="elipse"
@@ -468,6 +626,198 @@ const Home: FunctionComponent = () => {
               />
             </div>
           </Banner>
+
+          {/* Segments Section */}
+          <Segments id="segments">
+            <h2 className="section-title">Soluções por Segmento</h2>
+            <p className="section-subtitle">
+              Selecione o seu segmento e veja como o Gestão Boa atende as necessidades do seu negócio
+            </p>
+
+            <div className="niche-tabs">
+              {segments.map((seg, idx) => (
+                <button
+                  key={idx}
+                  className={`niche-tab-btn ${
+                    currentSegmentIndex === idx ? "active" : ""
+                  }`}
+                  onClick={() => goToSegment(idx)}
+                >
+                  <span>{seg.icon}</span>
+                  <span>{seg.title}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="carousel-container">
+              {/* Botão anterior */}
+              <button
+                className="carousel-btn carousel-btn-prev"
+                onClick={prevSegment}
+                aria-label="Segmento anterior"
+              >
+                ‹
+              </button>
+
+              {/* Container dos cards visíveis */}
+              <div className="carousel-track">
+                {getVisibleSegments().map((segment, index) => (
+                  <div
+                    key={currentSegmentIndex + index}
+                    className="carousel-card"
+                  >
+                    <img
+                      src={segment.image}
+                      alt={segment.alt}
+                      className="segment-image"
+                    />
+                    <h3 className="segment-title">{segment.title}</h3>
+                    <p className="segment-description">{segment.description}</p>
+                    <ul className="segment-features">
+                      {segment.features.map((feature, featureIndex) => (
+                        <li key={featureIndex}>{feature}</li>
+                      ))}
+                    </ul>
+                    <a href={segment.link} className="segment-link">
+                      {segment.linkText}
+                    </a>
+                  </div>
+                ))}
+              </div>
+
+              {/* Botão próximo */}
+              <button
+                className="carousel-btn carousel-btn-next"
+                onClick={handleNextSegment}
+                aria-label="Próximo segmento"
+              >
+                ›
+              </button>
+            </div>
+
+            {/* Indicadores de posição */}
+            <div className="carousel-indicators">
+              {Array.from(
+                { length: Math.ceil(segments.length / itemsPerPage) },
+                (_, pageIndex) => (
+                  <button
+                    key={pageIndex}
+                    className={`carousel-indicator ${
+                      Math.floor(currentSegmentIndex / itemsPerPage) ===
+                      pageIndex
+                        ? "active"
+                        : ""
+                    }`}
+                    onClick={() => goToSegment(pageIndex * itemsPerPage)}
+                    aria-label={`Ir para página ${pageIndex + 1}`}
+                  />
+                )
+              )}
+            </div>
+          </Segments>
+
+          {/* Feature Hub (Abas de Recursos por Pilar - Estilo AgendaPro) */}
+          <FeatureHub id="recursos">
+            <div className="feature-hub-header">
+              <h2 className="hub-title">Tudo o que seu negócio precisa em uma só plataforma</h2>
+              <p className="hub-subtitle">
+                Organize seus agendamentos, automatize a comunicação com clientes e acompanhe seu faturamento em tempo real.
+              </p>
+            </div>
+
+            <div className="feature-tabs">
+              {featurePillars.map((pillar, idx) => (
+                <button
+                  key={pillar.id}
+                  className={`feature-tab-btn ${activeFeatureTab === idx ? "active" : ""}`}
+                  onClick={() => setActiveFeatureTab(idx)}
+                >
+                  <span>{pillar.icon}</span>
+                  <span>{pillar.tabTitle}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="feature-display">
+              <div className="feature-info">
+                <div className="feature-tag">{featurePillars[activeFeatureTab].tag}</div>
+                <h3>{featurePillars[activeFeatureTab].title}</h3>
+                <p>{featurePillars[activeFeatureTab].description}</p>
+                <ul className="feature-checklist">
+                  {featurePillars[activeFeatureTab].checklist.map((item, i) => (
+                    <li key={i}>
+                      <span className="check-icon">✓</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div style={{ marginTop: "15px" }}>
+                  <a href="/preco" className="button button-link" style={{ textDecoration: "none" }}>
+                    <Button width="220px" text="TESTAR RECURSO GRÁTIS" method={() => {}} type="focused" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="feature-preview-card">
+                <div className="preview-header">
+                  <span className="title">{featurePillars[activeFeatureTab].previewTitle}</span>
+                  <span className="status">{featurePillars[activeFeatureTab].previewStatus}</span>
+                </div>
+                {featurePillars[activeFeatureTab].previewItems.map((item, idx) => (
+                  <div key={idx} className="preview-item">
+                    <span className="item-name">{item.name}</span>
+                    <span className="item-val">{item.val}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FeatureHub>
+
+          {/* Ecosystem Section */}
+          <EcosystemSection id="ecossistema">
+            <div className="eco-header">
+              <h2>Um universo de ferramentas integradas ao seu dia a dia</h2>
+              <p>Conecte o Gestão Boa às plataformas que você e seus clientes já usam</p>
+            </div>
+
+            <div className="eco-grid">
+              <div className="eco-card">
+                <div className="eco-icon">📱</div>
+                <h3>Link da Bio & Redes Sociais</h3>
+                <p>Seu catálogo de serviços e agendamentos com link exclusivo para usar no perfil do Instagram e TikTok.</p>
+              </div>
+
+              <div className="eco-card">
+                <div className="eco-icon">💬</div>
+                <h3>Automação de WhatsApp</h3>
+                <p>Lembretes automáticos 24h antes do corte para zerar as faltas e avisos instantâneos a cada agendamento.</p>
+              </div>
+
+              <div className="eco-card">
+                <div className="eco-icon">📍</div>
+                <h3>Google Meu Negócio</h3>
+                <p>Facilite a vida dos clientes que buscam por barbearias, salões ou estéticas na sua região no Google.</p>
+              </div>
+
+              <div className="eco-card">
+                <div className="eco-icon">💳</div>
+                <h3>Gestão de Pagamentos</h3>
+                <p>Receba via Pix, dinheiro ou cartão e tenha o fechamento de caixa diário calculado no automático.</p>
+              </div>
+
+              <div className="eco-card">
+                <div className="eco-icon">📊</div>
+                <h3>Relatórios & Exportação</h3>
+                <p>Gere relatórios de comissões por profissional, faturamento diário/mensal e controle de estoque em PDF ou Excel.</p>
+              </div>
+
+              <div className="eco-card">
+                <div className="eco-icon">🔒</div>
+                <h3>Nuvem & Backup Seguro</h3>
+                <p>Acesse seus dados de qualquer celular, tablet ou computador com segurança total e atualização em tempo real.</p>
+              </div>
+            </div>
+          </EcosystemSection>
 
           <Solutions id="solution">
             <div className="metrics-section">
@@ -579,309 +929,6 @@ const Home: FunctionComponent = () => {
                   <div className="metric-description">Clientes recomendam</div>
                 </div>
               </div>
-            </div>
-
-            {/* Benefícios / Soluções */}
-            <div className="benefits-section">
-              <h2 className="benefits-title">
-                Como a Gestão Boa pode turbinar o seu negócio?
-              </h2>
-              <div className="benefits">
-                <div className="benefit">
-                  <div className="benefit-icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#0077b6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <rect
-                        x="3"
-                        y="4"
-                        width="18"
-                        height="18"
-                        rx="2"
-                        ry="2"
-                      ></rect>
-                      <line x1="16" y1="2" x2="16" y2="6"></line>
-                      <line x1="8" y1="2" x2="8" y2="6"></line>
-                      <line x1="3" y1="10" x2="21" y2="10"></line>
-                    </svg>
-                  </div>
-                  <div className="benefit-content">
-                    <h3 className="benefit-title">Agenda Simplificada</h3>
-                    <p className="benefit-description">
-                      Mantenha seus compromissos sempre à mão. Sistema intuitivo
-                      de agendamento com notificações automáticas.
-                    </p>
-                    <a href="/solucao#agenda" className="benefit-link">
-                      Saiba mais →
-                    </a>
-                  </div>
-                </div>
-
-                <div className="benefit">
-                  <div className="benefit-icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#0077b6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                      <line x1="3" y1="6" x2="21" y2="6"></line>
-                      <path d="M16 10a4 4 0 0 1-8 0"></path>
-                    </svg>
-                  </div>
-                  <div className="benefit-content">
-                    <h3 className="benefit-title">Gerenciamento de Produtos</h3>
-                    <p className="benefit-description">
-                      Controle completo do estoque com análise detalhada de
-                      vendas e giro de produtos.
-                    </p>
-                    <a href="/solucao#produtos" className="benefit-link">
-                      Saiba mais →
-                    </a>
-                  </div>
-                </div>
-
-                <div className="benefit">
-                  <div className="benefit-icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#0077b6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="12" y1="1" x2="12" y2="23"></line>
-                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                    </svg>
-                  </div>
-                  <div className="benefit-content">
-                    <h3 className="benefit-title">Controle Financeiro</h3>
-                    <p className="benefit-description">
-                      Gestão completa de entradas e saídas com relatórios
-                      detalhados por método de pagamento.
-                    </p>
-                    <a href="/solucao#financeiro" className="benefit-link">
-                      Saiba mais →
-                    </a>
-                  </div>
-                </div>
-
-                <div className="benefit">
-                  <div className="benefit-icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#0077b6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="18" y1="20" x2="18" y2="10"></line>
-                      <line x1="12" y1="20" x2="12" y2="4"></line>
-                      <line x1="6" y1="20" x2="6" y2="14"></line>
-                    </svg>
-                  </div>
-                  <div className="benefit-content">
-                    <h3 className="benefit-title">Análises Detalhadas</h3>
-                    <p className="benefit-description">
-                      Dashboard completo com métricas em tempo real para
-                      decisões baseadas em dados.
-                    </p>
-                    <a href="/solucao#analytics" className="benefit-link">
-                      Saiba mais →
-                    </a>
-                  </div>
-                </div>
-
-                <div className="benefit">
-                  <div className="benefit-icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#0077b6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
-                  </div>
-                  <div className="benefit-content">
-                    <h3 className="benefit-title">Fidelização de Clientes</h3>
-                    <p className="benefit-description">
-                      Automatize mensagens personalizadas e construa
-                      relacionamentos duradouros.
-                    </p>
-                    <a href="/solucao#clientes" className="benefit-link">
-                      Saiba mais →
-                    </a>
-                  </div>
-                </div>
-
-                <div className="benefit">
-                  <div className="benefit-icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#0077b6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                      <circle cx="9" cy="7" r="4"></circle>
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
-                  </div>
-                  <div className="benefit-content">
-                    <h3 className="benefit-title">Gestão de Comissões</h3>
-                    <p className="benefit-description">
-                      Calcule automaticamente comissões de equipe com total
-                      transparência e precisão.
-                    </p>
-                    <a href="/solucao#comissoes" className="benefit-link">
-                      Saiba mais →
-                    </a>
-                  </div>
-                </div>
-
-                <div className="benefit">
-                  <div className="benefit-icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#0077b6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                    </svg>
-                  </div>
-                  <div className="benefit-content">
-                    <h3 className="benefit-title">Lembretes WhatsApp</h3>
-                    <p className="benefit-description">
-                      Funcionário avisado quando cliente agenda pelo site.
-                      Cliente lembrado 1 dia antes do corte.
-                    </p>
-                    <a
-                      href="/solucao#lembretes-whatsapp"
-                      className="benefit-link"
-                    >
-                      Saiba mais →
-                    </a>
-                  </div>
-                </div>
-
-                <div className="benefit">
-                  <div className="benefit-icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#0077b6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                    </svg>
-                  </div>
-                  <div className="benefit-content">
-                    <h3 className="benefit-title">Link Personalizado</h3>
-                    <p className="benefit-description">
-                      Seu link exclusivo para clientes agendarem 24h.
-                      Compartilhe no Instagram e WhatsApp.
-                    </p>
-                    <a
-                      href="/solucao#link-agendamentos"
-                      className="benefit-link"
-                    >
-                      Saiba mais →
-                    </a>
-                  </div>
-                </div>
-
-                <div className="benefit">
-                  <div className="benefit-icon">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#0077b6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
-                      <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
-                      <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
-                    </svg>
-                  </div>
-                  <div className="benefit-content">
-                    <h3 className="benefit-title">Gestão de Assinaturas</h3>
-                    <p className="benefit-description">
-                      Controle de mensalidades e pacotes com cobrança recorrente
-                      e acompanhamento de uso.
-                    </p>
-                    <a href="/solucao#clientes" className="benefit-link">
-                      Saiba mais →
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Botão Experimente gratuitamente */}
-            <div className="try-free-button-container">
-              <a
-                className="try-free-button"
-                href="/preco"
-                title="EXPERIMENTE GRATUITAMENTE"
-              >
-                <Button
-                  width="100%"
-                  text="EXPERIMENTE GRATUITAMENTE"
-                  method={() => {}}
-                  type={"focused"}
-                />
-              </a>
             </div>
 
             <div className="testimonies">
@@ -1254,90 +1301,72 @@ const Home: FunctionComponent = () => {
 
           <RoiCalculator />
 
-          {/* Segments Section */}
-          <Segments id="segments">
-            <h2 className="section-title">Segmentos que Atendemos</h2>
-            <p className="section-subtitle">
-              Oferecemos soluções especializadas para diferentes tipos de
-              negócios de beleza e bem-estar
-            </p>
+          {/* Suporte & Onboarding Section */}
+          <SupportSection id="suporte">
+            <div className="support-container">
+              <div className="support-content">
+                <div className="support-badge">
+                  <span>🎧</span>
+                  <span>Suporte & Acompanhamento Humanizado</span>
+                </div>
+                <h2 className="support-title">Você nunca fica sozinho no Gestão Boa</h2>
+                <p className="support-description">
+                  Sabemos que mudar de sistema ou começar a digitalizar seu negócio pode parecer desafiador. Por isso, oferecemos suporte dedicado e acompanhamento gratuito para você e sua equipe.
+                </p>
 
-            <div className="carousel-container">
-              {/* Botão anterior */}
-              <button
-                className="carousel-btn carousel-btn-prev"
-                onClick={prevSegment}
-                aria-label="Segmento anterior"
-              >
-                ‹
-              </button>
-
-              {/* Container dos cards visíveis */}
-              <div className="carousel-track">
-                {getVisibleSegments().map((segment, index) => (
-                  <div
-                    key={currentSegmentIndex + index}
-                    className="carousel-card"
-                  >
-                    <img
-                      src={segment.image}
-                      alt={segment.alt}
-                      className="segment-image"
-                    />
-                    <h3 className="segment-title">{segment.title}</h3>
-                    <p className="segment-description">{segment.description}</p>
-                    <ul className="segment-features">
-                      {segment.features.map((feature, featureIndex) => (
-                        <li key={featureIndex}>{feature}</li>
-                      ))}
-                    </ul>
-                    <a href={segment.link} className="segment-link">
-                      {segment.linkText}
-                    </a>
+                <div className="support-list">
+                  <div className="support-item">
+                    <div className="support-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <div>
+                      <h4 className="support-text-h4">Onboarding Inicial Guiado</h4>
+                      <p className="support-text-p">Te ajudamos a cadastrar serviços, profissionais e configurar seus horários no primeiro dia.</p>
+                    </div>
                   </div>
-                ))}
+
+                  <div className="support-item">
+                    <div className="support-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    </div>
+                    <div>
+                      <h4 className="support-text-h4">Suporte Rápido via WhatsApp</h4>
+                      <p className="support-text-p">Atendimento humanizado em português para tirar dúvidas e resolver qualquer questão com agilidade.</p>
+                    </div>
+                  </div>
+
+                  <div className="support-item">
+                    <div className="support-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    </div>
+                    <div>
+                      <h4 className="support-text-h4">Tutoriais e Treinamentos</h4>
+                      <p className="support-text-p">Acesso a conteúdos práticos para você e sua equipe dominarem a gestão e venderem mais.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* Botão próximo */}
-              <button
-                className="carousel-btn carousel-btn-next"
-                onClick={handleNextSegment}
-                aria-label="Próximo segmento"
-              >
-                ›
-              </button>
+              <div className="support-card-highlight">
+                <div className="support-card-badge">✨ 100% Gratuito</div>
+                <h3>Pronto para transformar a gestão do seu negócio?</h3>
+                <p>Comece seu teste grátis de 20 dias agora mesmo. Não pedimos cartão de crédito na inscrição e a configuração leva menos de 5 minutos.</p>
+                <a href="/preco" className="button button-link" style={{ textDecoration: "none", marginTop: "10px" }}>
+                  <Button width="100%" text="CRIAR MINHA CONTA GRÁTIS" method={() => {}} type="focused" />
+                </a>
+              </div>
             </div>
-
-            {/* Indicadores de posição */}
-            <div className="carousel-indicators">
-              {Array.from(
-                { length: Math.ceil(segments.length / itemsPerPage) },
-                (_, pageIndex) => (
-                  <button
-                    key={pageIndex}
-                    className={`carousel-indicator ${
-                      Math.floor(currentSegmentIndex / itemsPerPage) ===
-                      pageIndex
-                        ? "active"
-                        : ""
-                    }`}
-                    onClick={() => goToSegment(pageIndex * itemsPerPage)}
-                    aria-label={`Ir para página ${pageIndex + 1}`}
-                  />
-                )
-              )}
-            </div>
-          </Segments>
+          </SupportSection>
 
           <PlansCTA>
-            <h2 className="cta-title">Escolha o plano ideal para o seu negócio</h2>
+            <h2 className="cta-title">Faça simples. Faça com o Gestão Boa.</h2>
             <p className="cta-text">
-              Planos sem fidelidade ou taxas de cancelamento. Teste gratuitamente por 20 dias e comprove!
+              Cada agendamento é crescimento. Organize seu negócio, atraia mais clientes e alcance a sua melhor versão.
             </p>
             <a href="/preco" className="cta-button" title="Ver Planos e Preços">
-              Conhecer Nossos Planos & Preços ➔
+              Crie sua conta grátis ➔
             </a>
-            <span className="plans-info">Assinaturas a partir de R$ 64,00/mês</span>
+            <span className="plans-info">Teste grátis por 20 dias — Sem cartão de crédito</span>
           </PlansCTA>
 
           {/* FAQ Section */}

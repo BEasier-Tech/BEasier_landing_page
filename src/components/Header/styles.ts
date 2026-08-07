@@ -6,15 +6,18 @@ export const Container = styled.div<{ isMenuOpen?: boolean }>`
     justify-content: space-between;
     align-items: center;
     grid-column: span 12;
-    padding: 8px 5%;
+    padding: 10px 5%;
     position: fixed;
     z-index: 200;
-    background-color: #ffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     top: 0;
     left: 0;
     right: 0;
-    min-height: 54px;
+    min-height: 60px;
 
     &::after {
         content: '';
