@@ -43,19 +43,19 @@ const PRESET_CONFIGS: Record<PresetType, PresetConfig> = {
 const USER_TIER_CONFIGS: Record<UserTierType, { label: string; price: number }> = {
   "1": {
     label: "1 Usuário",
-    price: 64,
+    price: 69.9,
   },
   "3": {
-    label: "Até 3 Usuários",
-    price: 89,
+    label: "2-3 Usuários",
+    price: 79.9,
   },
   "10": {
-    label: "Até 10 Usuários",
-    price: 129,
+    label: "4-6 Usuários",
+    price: 109.9,
   },
   ilimitado: {
     label: "Ilimitados",
-    price: 149,
+    price: 159.9,
   },
 };
 

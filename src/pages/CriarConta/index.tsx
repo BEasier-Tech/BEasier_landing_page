@@ -46,22 +46,22 @@ const PLAN_CONFIG: Record<PlanType, {
 }> = {
   "basico": {
     name: "Básico",
-    price: "R$ 64,00/mês",
+    price: "R$ 69,90/mês",
     paymentLink: "https://www.app.gestaoboa.com.br",
   },
   "crescimento": {
     name: "Crescimento",
-    price: "R$ 89,00/mês",
+    price: "R$ 79,90/mês",
     paymentLink: "https://www.app.gestaoboa.com.br",
   },
   "empresarial": {
     name: "Empresarial",
-    price: "R$ 129,00/mês",
+    price: "R$ 109,90/mês",
     paymentLink: "https://www.app.gestaoboa.com.br",
   },
   "ilimitado": {
     name: "Ilimitado",
-    price: "R$ 149,00/mês",
+    price: "R$ 159,90/mês",
     paymentLink: "https://www.app.gestaoboa.com.br",
   },
   "black-friday": {

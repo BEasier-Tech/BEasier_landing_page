@@ -357,7 +357,7 @@ const Home: FunctionComponent = () => {
 
           {/* Schema.org structured data - Otimizado */}
           <script type="application/ld+json">
-            {`{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Gestão Boa","description":"Sistema de Gestão completo com agendamentos, controle financeiro, CRM, estoque e comissões","url":"https://gestaoboa.com.br","applicationCategory":"BusinessApplication","offers":{"@type":"Offer","price":"49.90","priceCurrency":"BRL"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"500"},"review":[{"@type":"Review","author":{"@type":"Person","name":"Fernanda Silva","jobTitle":"Proprietária do Studio Fernanda Hair","image":"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop&crop=face"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"O sistema mudou completamente a organização do meu salão. Minhas clientes adoram agendar online pelo link e eu não preciso mais ficar atendendo WhatsApp o dia inteiro. Recomendo muito!"},{"@type":"Review","author":{"@type":"Person","name":"Pedro Arthur","jobTitle":"Proprietário da Prime Barbershop","image":"https://gestaoboa.com.br/PedroArthur.jpg"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"O app da gestão boa vem me ajudando muito desde o primeiro dia, consigo saber com exatidão quantos clientes eu tenho e atendo, faturamento, venda de produtos, etc."},{"@type":"Review","author":{"@type":"Person","name":"Gustavo Fonseca","jobTitle":"Barbeiro"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"Fora de série, fora de série mesmo! Eu te chamo, tu me responde. Tinha muito receio, pois já contratei outros serviços e não tinha esse retorno pra tirar minhas dúvidas. Tu responde, tira minhas dúvidas, não faz corpo mole, e me mostra tudo certinho. Cara, tá show de bola!"}]}`}
+            {`{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Gestão Boa","description":"Sistema de Gestão completo com agendamentos, controle financeiro, CRM, estoque e comissões","url":"https://gestaoboa.com.br","applicationCategory":"BusinessApplication","offers":{"@type":"Offer","price":"49.90","priceCurrency":"BRL"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"500"},"review":[{"@type":"Review","author":{"@type":"Person","name":"Marcela","jobTitle":"Proprietária do Studio Marcela Hair","image":"https://gestaoboa.com.br/Marcela.jpeg"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"O sistema mudou completamente a organização do meu salão. Minhas clientes adoram agendar online pelo link e eu não preciso mais ficar atendendo WhatsApp o dia inteiro. Recomendo muito!"},{"@type":"Review","author":{"@type":"Person","name":"Pedro Arthur","jobTitle":"Proprietário da Prime Barbershop","image":"https://gestaoboa.com.br/PedroArthur.jpg"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"O app da gestão boa vem me ajudando muito desde o primeiro dia, consigo saber com exatidão quantos clientes eu tenho e atendo, faturamento, venda de produtos, etc."},{"@type":"Review","author":{"@type":"Person","name":"Gustavo Fonseca","jobTitle":"Barbeiro"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"Fora de série, fora de série mesmo! Eu te chamo, tu me responde. Tinha muito receio, pois já contratei outros serviços e não tinha esse retorno pra tirar minhas dúvidas. Tu responde, tira minhas dúvidas, não faz corpo mole, e me mostra tudo certinho. Cara, tá show de bola!"}]}`}
           </script>
         </Helmet>
         <Grid>
@@ -451,21 +451,49 @@ const Home: FunctionComponent = () => {
                 </a>
               </div>
             </div>
-            <div className="images">
-              <img
-                className="cellphone"
-                src="/smartphone.png"
-                alt="Aplicativo Gestão Boa em smartphone mostrando interface de gestão"
-                loading="eager"
-                width="300"
-                height="600"
-              />
-              <img
-                className="elipse"
-                src="/Ellipse.svg"
-                alt="Elemento decorativo"
-                loading="lazy"
-              />
+            <div className="dual-showcase-container">
+              <div className="showcase-glow-flare" />
+              
+              {/* Moldura do Computador (Web) */}
+              <div className="desktop-web-mockup">
+                <div className="desktop-window-header">
+                  <div className="window-dots">
+                    <span className="dot red" />
+                    <span className="dot yellow" />
+                    <span className="dot green" />
+                  </div>
+                  <div className="window-address-bar">
+                    <span className="lock-icon">🔒</span> app.gestaoboa.com.br
+                  </div>
+                </div>
+                <div className="desktop-screen">
+                  <img
+                    src="/web-agenda.png"
+                    alt="Gestão Boa Sistema Web no Computador - Agenda Completa"
+                    loading="eager"
+                    width="1000"
+                    height="580"
+                  />
+                </div>
+              </div>
+
+              {/* Moldura do Celular (App Mobile) */}
+              <div className="mobile-app-mockup">
+                <div className="phone-notch">
+                  <span className="camera-lens" />
+                  <span className="speaker-bar" />
+                </div>
+                <div className="phone-screen">
+                  <img
+                    src="/app-dashboard.png"
+                    alt="Gestão Boa App Mobile no Celular - Dashboard do Caixa e Vendas"
+                    loading="eager"
+                    width="260"
+                    height="480"
+                  />
+                </div>
+                <div className="phone-home-bar" />
+              </div>
             </div>
           </Banner>
 
@@ -1023,7 +1051,7 @@ const Home: FunctionComponent = () => {
                   </div>
                 </div>
 
-                {/* Depoimento Fernanda Silva */}
+                {/* Depoimento Marcela */}
                 <div
                   className="testimonial-card-new"
                   itemScope
@@ -1032,8 +1060,8 @@ const Home: FunctionComponent = () => {
                   <div className="testimonial-quote">"</div>
                   <div className="testimonial-header">
                     <img
-                      src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop&crop=face"
-                      alt="Fernanda Silva"
+                      src="/Marcela.jpeg"
+                      alt="Marcela"
                       className="testimonial-avatar"
                       itemProp="image"
                       loading="lazy"
@@ -1041,7 +1069,7 @@ const Home: FunctionComponent = () => {
                         const target = e.target as HTMLImageElement;
                         target.onerror = null;
                         target.src =
-                          "https://placehold.co/64x64/007BFF/FFFFFF?text=FS";
+                          "https://placehold.co/64x64/007BFF/FFFFFF?text=M";
                       }}
                     />
                     <div className="testimonial-info">
@@ -1050,9 +1078,9 @@ const Home: FunctionComponent = () => {
                         itemScope
                         itemType="https://schema.org/Person"
                       >
-                        <span itemProp="name">Fernanda Silva</span>
+                        <span itemProp="name">Marcela</span>
                       </h4>
-                      <p itemProp="jobTitle">Proprietária do Studio Fernanda Hair</p>
+                      <p itemProp="jobTitle">Proprietária do Studio Marcela Hair</p>
                     </div>
                   </div>
 
@@ -1337,7 +1365,7 @@ const Home: FunctionComponent = () => {
             <a href="/preco" className="cta-button" title="Ver Planos e Preços">
               Conhecer Nossos Planos & Preços ➔
             </a>
-            <span className="plans-info">Assinaturas a partir de R$ 64,00/mês</span>
+            <span className="plans-info">Assinaturas a partir de R$ 69,90/mês</span>
           </PlansCTA>
 
           {/* FAQ Section */}
@@ -1383,8 +1411,8 @@ const Home: FunctionComponent = () => {
                 </summary>
                 <p>
                   Temos planos flexíveis que se adaptam ao tamanho e à
-                  necessidade do seu negócio, começando em R$ 64,00 e indo até
-                  R$ 149,00 por mês. Todos os planos incluem as funcionalidades
+                  necessidade do seu negócio, começando em R$ 69,90 e indo até
+                  R$ 159,90 por mês. Todos os planos incluem as funcionalidades
                   essenciais para uma gestão de ponta. E você pode experimentar
                   gratuitamente por 20 dias, sem necessidade de cartão de
                   crédito!

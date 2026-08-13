@@ -90,15 +90,12 @@ export const HeroBadge = styled.div`
 `;
 
 export const Banner = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
   grid-column: span 12;
-  padding-top: 150px;
-  padding-bottom: 60px;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding: 140px 40px 60px;
   min-height: auto;
   position: relative;
   overflow: hidden;
@@ -108,13 +105,13 @@ export const Banner = styled.div`
   &::before {
     content: '';
     position: absolute;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(0, 180, 216, 0.12) 0%, rgba(0, 180, 216, 0) 70%);
-    top: -100px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 180, 216, 0.08) 0%, rgba(0, 180, 216, 0) 70%);
+    top: -200px;
     right: -100px;
     border-radius: 50%;
-    filter: blur(50px);
+    filter: blur(80px);
     z-index: 1;
     pointer-events: none;
   }
@@ -122,18 +119,18 @@ export const Banner = styled.div`
   &::after {
     content: '';
     position: absolute;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(3, 4, 94, 0.06) 0%, rgba(3, 4, 94, 0) 70%);
-    bottom: -150px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(3, 4, 94, 0.05) 0%, rgba(3, 4, 94, 0) 70%);
+    bottom: -200px;
     left: -100px;
     border-radius: 50%;
-    filter: blur(60px);
+    filter: blur(80px);
     z-index: 1;
     pointer-events: none;
   }
 
-  .content, .images {
+  .content, .dual-showcase-container {
     position: relative;
     z-index: 2;
   }
@@ -141,9 +138,9 @@ export const Banner = styled.div`
   .content {
     display: flex;
     flex-direction: column;
-    grid-column: span 7;
-    gap: 30px;
-    justify-self: flex-start;
+    align-items: center;
+    gap: 24px;
+    max-width: 900px;
   }
 
   .content .badge-link {
@@ -152,172 +149,366 @@ export const Banner = styled.div`
   }
 
   .content .title {
-    font-weight: bold;
-    font-size: 72px;
-    text-align: start;
-    max-width: 700px;
-    line-height: 1.1;
+    font-weight: 800;
+    font-size: 56px;
+    text-align: center;
+    max-width: 850px;
+    line-height: 1.12;
+    color: #0f172a;
+    letter-spacing: -1.5px;
+
+    span.highlight-text {
+      background: linear-gradient(90deg, #0077b6 0%, #00b4d8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   }
 
   .content .subtitle {
-    font-weight: lighter;
-    font-size: 24px;
-    text-align: start;
-    max-width: 600px;
-    line-height: 1.4;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: #475569;
+    text-align: center;
+    max-width: 650px;
+    line-height: 1.6;
   }
 
   .content .subtitle span {
-    font-weight: bold;
-    color: #03045e;
+    font-weight: 700;
+    color: #0077b6;
   }
 
   .content .buttons {
     display: flex;
-    max-width: 600px;
-    gap: 20px;
+    gap: 16px;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
+    margin-top: 8px;
   }
 
   .content .buttons .button {
-    width: 250px;
-  }
-
-  .content .buttons .button-link {
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .images {
-    display: flex;
-    grid-column: span 5;
-    position: relative;
-    width: fit-content;
-    height: 600px;
-    align-items: center;
-    justify-self: center;
-  }
-
-  .images .cellphone {
-    position: absolute;
-    z-index: 100;
-    height: 600px;
     width: auto;
-    right: 0px;
-    left: 0px;
-    top: 0px;
-    bottom: 0px;
-    margin: 0 auto;
-    animation: ${levitate} 6s ease-in-out infinite;
-    filter: drop-shadow(0 25px 30px rgba(3, 4, 94, 0.15));
+    min-width: 240px;
   }
 
-  .images .elipse {
-    height: 100%;
-  }
+  .dual-showcase-container {
+    display: flex;
+    position: relative;
+    width: 100%;
+    max-width: 1060px;
+    margin-top: 50px;
+    align-items: flex-end;
+    justify-content: center;
+    padding-right: 40px;
 
-  @media (max-width: 1780px) {
-    .content .title {
-      font-size: 56px;
-      max-width: 550px;
+    .showcase-glow-flare {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 95%;
+      height: 85%;
+      background: radial-gradient(ellipse at center, rgba(0, 180, 216, 0.22) 0%, rgba(3, 4, 94, 0.06) 55%, transparent 80%);
+      filter: blur(65px);
+      pointer-events: none;
+      z-index: 1;
     }
 
-    .content .subtitle {
-      max-width: 500px;
-      font-size: 20px;
+    /* Computador / Web Browser Mockup */
+    .desktop-web-mockup {
+      position: relative;
+      z-index: 2;
+      width: 86%;
+      max-width: 900px;
+      background: #0f172a;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 30px 80px -15px rgba(3, 4, 94, 0.25), 0 0 0 1px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+      &:hover {
+        box-shadow: 0 40px 100px -20px rgba(0, 180, 216, 0.3);
+      }
+
+      .desktop-window-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #1e293b;
+        padding: 12px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        .window-dots {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+
+            &.red { background: #ef4444; }
+            &.yellow { background: #f59e0b; }
+            &.green { background: #10b981; }
+          }
+        }
+
+        .window-address-bar {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(15, 23, 42, 0.6);
+          color: #94a3b8;
+          padding: 6px 20px;
+          border-radius: 50px;
+          font-size: 0.82rem;
+          font-weight: 600;
+
+          .lock-icon {
+            font-size: 0.75rem;
+          }
+        }
+
+        .window-badge {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.78rem;
+          font-weight: 700;
+          color: #38bdf8;
+          background: rgba(56, 189, 248, 0.1);
+          padding: 4px 12px;
+          border-radius: 50px;
+        }
+      }
+
+      .desktop-screen {
+        width: 100%;
+        background: #ffffff;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: auto;
+          max-height: 520px;
+          object-fit: cover;
+          display: block;
+        }
+      }
     }
 
-    .content .buttons {
-      max-width: 500px;
-    }
+    /* Celular / Mobile Smartphone Mockup Sobreposto */
+    .mobile-app-mockup {
+      position: absolute;
+      right: 0;
+      bottom: -20px;
+      z-index: 10;
+      width: 240px;
+      background: #0f172a;
+      border-radius: 38px;
+      padding: 22px 8px 14px;
+      box-shadow: 0 35px 80px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.3) inset;
+      border: 3px solid #1e293b;
+      animation: ${levitate} 6s ease-in-out infinite;
 
-    .images {
-      height: 500px;
-    }
+      .phone-notch {
+        position: absolute;
+        top: 7px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 75px;
+        height: 12px;
+        background: #000000;
+        border-radius: 10px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0 8px;
 
-    .images .cellphone {
-      height: 500px;
+        .camera-lens {
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: #1e293b;
+        }
+
+        .speaker-bar {
+          width: 24px;
+          height: 2px;
+          border-radius: 2px;
+          background: #1e293b;
+        }
+      }
+
+      .phone-screen {
+        width: 100%;
+        background: #ffffff;
+        border-radius: 24px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: auto;
+          max-height: 440px;
+          object-fit: contain;
+          display: block;
+        }
+      }
+
+      .phone-home-bar {
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90px;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+        z-index: 20;
+      }
+
+      .phone-app-tag {
+        position: absolute;
+        top: -14px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #0077b6;
+        color: #ffffff;
+        font-size: 0.75rem;
+        font-weight: 800;
+        padding: 4px 14px;
+        border-radius: 50px;
+        box-shadow: 0 4px 15px rgba(0, 119, 182, 0.4);
+        white-space: nowrap;
+        z-index: 25;
+      }
     }
   }
 
   @media (max-width: 1300px) {
-    padding-left: 60px;
-    padding-right: 60px;
+    padding: 130px 40px 50px;
 
     .content .title {
-      font-size: 44px;
-      max-width: 420px;
+      font-size: 46px;
+      max-width: 700px;
     }
 
-    .content .subtitle {
-      max-width: 400px;
-      font-size: 18px;
-    }
+    .dual-showcase-container {
+      max-width: 940px;
 
-    .content .buttons {
-      max-width: 400px;
-    }
-
-    .images {
-      height: 420px;
-    }
-
-    .images .cellphone {
-      height: 420px;
-    }
-  }
-
-  @media (max-width: 1080px) {
-    padding-left: 40px;
-    padding-right: 40px;
-
-    .content {
-      grid-column: span 6;
-    }
-
-    .images {
-      grid-column: span 6;
-      justify-self: center;
-      height: 400px;
-    }
-
-    .images .elipse {
-      display: none;
-    }
-
-    .images .cellphone {
-      position: unset;
-      height: 400px;
+      .mobile-app-mockup {
+        width: 210px;
+        right: 0;
+        bottom: -15px;
+      }
     }
   }
 
   @media (max-width: 960px) {
-    display: flex;
-    flex-direction: column;
-    padding: 120px 40px 60px 40px;
-    height: auto;
-
-    .content {
-      width: 100%;
-      gap: 25px;
-    }
-
-    .content .badge-link {
-      align-self: center;
-    }
+    padding: 120px 30px 40px;
 
     .content .title {
-      font-size: 42px;
-      text-align: center;
+      font-size: 38px;
       max-width: 100%;
     }
 
     .content .subtitle {
-      font-size: 18px;
-      text-align: center;
-      max-width: 100%;
+      font-size: 1.05rem;
     }
+
+    .dual-showcase-container {
+      padding-right: 0;
+      flex-direction: column;
+      align-items: center;
+
+      .desktop-web-mockup {
+        width: 100%;
+      }
+
+      .mobile-app-mockup {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin-top: -40px;
+        width: 220px;
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    padding: 110px 20px 30px;
+
+    .content .title {
+      font-size: 32px;
+    }
+
+    .content .subtitle {
+      font-size: 1rem;
+    }
+
+    .dual-showcase-container {
+      margin-top: 30px;
+
+      .desktop-web-mockup .desktop-window-header {
+        padding: 8px 12px;
+
+        .window-badge {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 100px 16px 30px;
+
+    .content {
+      gap: 18px;
+    }
+
+    .content .title {
+      font-size: 28px;
+      letter-spacing: -0.5px;
+    }
+
+    .content .subtitle {
+      font-size: 0.95rem;
+    }
+
+    .content .buttons {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .content .buttons .button {
+      width: 100%;
+      min-width: unset;
+    }
+
+    .dual-showcase-container {
+      margin-top: 24px;
+
+      .desktop-web-mockup {
+        border-radius: 12px;
+
+        .desktop-window-header .window-address-bar {
+          font-size: 0.72rem;
+          padding: 4px 10px;
+        }
+      }
+
+      .mobile-app-mockup {
+        margin-top: -30px;
+        width: 190px;
+        border-radius: 28px;
+      }
+    }
+  }
 
     .content .buttons {
       flex-direction: row;

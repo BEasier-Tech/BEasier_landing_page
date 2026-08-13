@@ -680,11 +680,11 @@ const About = () => {
 
                 <div className="team-member-card">
                   <img
-                    src="/marcelo.png"
-                    alt="Marcelo - Comercial da Gestão Boa, especialista em vendas e relacionamento com clientes"
+                    src="/julia.jpg"
+                    alt="Julia Peralta - Comercial da Gestão Boa, especialista em vendas e relacionamento com clientes"
                   />
                   <div className="member-info">
-                    <h3 className="member-name">Marcelo</h3>
+                    <h3 className="member-name">Julia Peralta</h3>
                     <span className="member-role">Comercial</span>
                   </div>
                 </div>

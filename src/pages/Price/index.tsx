@@ -12,20 +12,28 @@ import "./styles.css";
 
 type PlanType = "Anual" | "Semestral" | "Mensal";
 
-const getDiscount = (type: PlanType) => {
-  switch (type) {
-    case "Anual":
-      return 0.24; // 24% off
-    case "Semestral":
-      return 0.15; // 15% off
-    default:
-      return 0;
-  }
-};
-
-const calculateDiscountedPrice = (price: number, type: PlanType) => {
-  const discount = getDiscount(type);
-  return price * (1 - discount);
+const PLAN_PRICES: Record<
+  PlanType,
+  { Basico: number; Standard: number; Premium: number; Ilimitado: number }
+> = {
+  Mensal: {
+    Basico: 79.90,
+    Standard: 99.90,
+    Premium: 129.90,
+    Ilimitado: 179.90,
+  },
+  Semestral: {
+    Basico: 79.90,
+    Standard: 89.90,
+    Premium: 119.90,
+    Ilimitado: 169.90,
+  },
+  Anual: {
+    Basico: 69.90,
+    Standard: 79.90,
+    Premium: 109.90,
+    Ilimitado: 159.90,
+  },
 };
 
 const Price = () => {
@@ -38,24 +46,18 @@ const Price = () => {
     price: string;
   } | null>(null);
 
-  // Price data
-  const monthlyPrices = {
-    Basico: 64.00,
-    Standard: 89.00,
-    Premium: 129.00,
-    Ilimitado: 149.00,
-  };
-
-  const getPriceData = (key: keyof typeof monthlyPrices) => {
-    const base = monthlyPrices[key];
-    const discounted = calculateDiscountedPrice(base, planType);
-    const daily = (planType === "Mensal" ? base : discounted) / 30;
-    const monthlyStr = (planType === "Mensal" ? base : discounted).toFixed(2).replace(".", ",");
-    const originalStr = base.toFixed(2).replace(".", ",");
+  const getPriceData = (key: keyof typeof PLAN_PRICES["Mensal"]) => {
+    const currentPrice = PLAN_PRICES[planType][key];
+    const monthlyBase = PLAN_PRICES["Mensal"][key];
+    const daily = currentPrice / 30;
+    const monthlyStr = currentPrice.toFixed(2).replace(".", ",");
+    const originalStr = monthlyBase.toFixed(2).replace(".", ",");
+    const hasDiscount = planType !== "Mensal" && currentPrice < monthlyBase;
     return {
       daily,
       monthlyStr,
       originalStr,
+      hasDiscount,
     };
   };
 
@@ -87,7 +89,7 @@ const Price = () => {
       name: "Equipe e Limites",
       features: [
         { name: "Gestão de Equipe e Desempenho", basico: false, crescimento: true, empresarial: true, ilimitado: true },
-        { name: "Profissionais (Usuários)", basico: "1 Usuário", crescimento: "Até 3 Usuários", empresarial: "Até 10 Usuários", ilimitado: "Ilimitados" },
+        { name: "Profissionais (Usuários)", basico: "1 Usuário", crescimento: "2-3 Usuários", empresarial: "4-6 Usuários", ilimitado: "Ilimitados" },
       ],
     },
     {
@@ -114,12 +116,12 @@ const Price = () => {
     <Container>
       <Helmet>
         <title>
-          Planos e Preços Gestão Boa - Sistema de Gestão a partir de R$ 64,00 |
+          Planos e Preços Gestão Boa - Sistema de Gestão a partir de R$ 69,90 |
           Teste Grátis
         </title>
         <meta
           name="description"
-          content="Planos de sistema de gestão da Gestão Boa a partir de R$ 64,00/mês. Teste grátis por 20 dias! Link de agendemento online, finanças, estoque e muito mais. Compare preços e funcionalidades."
+          content="Planos de sistema de gestão da Gestão Boa a partir de R$ 69,90/mês. Teste grátis por 20 dias! Link de agendamento online, finanças, estoque e muito mais. Compare preços e funcionalidades."
         />
         <meta
           name="keywords"
@@ -133,11 +135,11 @@ const Price = () => {
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content="Planos e Preços Gestão Boa - Sistema de Gestão a partir de R$ 64,00"
+          content="Planos e Preços Gestão Boa - Sistema de Gestão a partir de R$ 69,90"
         />
         <meta
           property="og:description"
-          content="Planos de sistema de gestão da Gestão Boa a partir de R$ 64,00/mês. Teste grátis por 20 dias! Link de agendemento online, finanças, estoque e muito mais."
+          content="Planos de sistema de gestão da Gestão Boa a partir de R$ 69,90/mês. Teste grátis por 20 dias! Link de agendamento online, finanças, estoque e muito mais."
         />
         <meta property="og:url" content="https://gestaoboa.com.br/preco" />
         <meta property="og:site_name" content="Gestão Boa" />
@@ -157,11 +159,11 @@ const Price = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Planos e Preços Gestão Boa - Sistema de Gestão a partir de R$ 64,00"
+          content="Planos e Preços Gestão Boa - Sistema de Gestão a partir de R$ 69,90"
         />
         <meta
           name="twitter:description"
-          content="Planos de sistema de gestão da Gestão Boa a partir de R$ 64,00/mês. Teste grátis por 20 dias!"
+          content="Planos de sistema de gestão da Gestão Boa a partir de R$ 69,90/mês. Teste grátis por 20 dias!"
         />
         <meta
           name="twitter:image"
@@ -195,9 +197,9 @@ const Price = () => {
                 "@type": "Offer",
                 name: "Plano Básico",
                 description: "Perfeito para quem está começando",
-                price: "64.00",
+                price: "69.90",
                 priceCurrency: "BRL",
-                priceValidUntil: "2025-12-31",
+                priceValidUntil: "2026-12-31",
                 availability: "https://schema.org/InStock",
                 category: "Software",
                 eligibleDuration: {
@@ -209,7 +211,7 @@ const Price = () => {
                   {
                     "@type": "TypeAndQuantityNode",
                     amountOfThisGood: 1,
-                    typeOfGood: "Link de agendemento online",
+                    typeOfGood: "Link de agendamento online",
                   },
                   {
                     "@type": "TypeAndQuantityNode",
@@ -232,9 +234,9 @@ const Price = () => {
                 "@type": "Offer",
                 name: "Plano Crescimento",
                 description: "Para pequenos negócios",
-                price: "89.00",
+                price: "79.90",
                 priceCurrency: "BRL",
-                priceValidUntil: "2025-12-31",
+                priceValidUntil: "2026-12-31",
                 availability: "https://schema.org/InStock",
                 category: "Software",
                 eligibleDuration: {
@@ -247,9 +249,9 @@ const Price = () => {
                 "@type": "Offer",
                 name: "Plano Empresarial",
                 description: "Perfeito para quem já tem funcionários",
-                price: "129.00",
+                price: "109.90",
                 priceCurrency: "BRL",
-                priceValidUntil: "2025-12-31",
+                priceValidUntil: "2026-12-31",
                 availability: "https://schema.org/InStock",
                 category: "Software",
                 eligibleDuration: {
@@ -262,9 +264,9 @@ const Price = () => {
                 "@type": "Offer",
                 name: "Plano Ilimitado",
                 description: "Para negócios em plena expansão",
-                price: "149.00",
+                price: "159.90",
                 priceCurrency: "BRL",
-                priceValidUntil: "2025-12-31",
+                priceValidUntil: "2026-12-31",
                 availability: "https://schema.org/InStock",
                 category: "Software",
                 eligibleDuration: {
@@ -311,33 +313,33 @@ const Price = () => {
               "Sistema completo de gestão com Link de agendemento online, finanças, estoque e muito mais",
             offers: {
               "@type": "AggregateOffer",
-              lowPrice: "64.00",
-              highPrice: "149.00",
+              lowPrice: "69.90",
+              highPrice: "179.90",
               priceCurrency: "BRL",
               offerCount: "4",
               offers: [
                 {
                   "@type": "Offer",
                   name: "Básico",
-                  price: "64.00",
+                  price: "69.90",
                   priceCurrency: "BRL",
                 },
                 {
                   "@type": "Offer",
                   name: "Crescimento",
-                  price: "89.00",
+                  price: "79.90",
                   priceCurrency: "BRL",
                 },
                 {
                   "@type": "Offer",
                   name: "Empresarial",
-                  price: "129.00",
+                  price: "109.90",
                   priceCurrency: "BRL",
                 },
                 {
                   "@type": "Offer",
                   name: "Ilimitado",
-                  price: "149.00",
+                  price: "159.90",
                   priceCurrency: "BRL",
                 },
               ],
@@ -361,15 +363,15 @@ const Price = () => {
                 name: "Qual é o valor dos planos da Gestão Boa?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Nossos planos começam em R$ 64,00/mês (plano Básico). Temos o plano Crescimento por R$ 89,00/mês, o plano Empresarial por R$ 129,00/mês e o plano Ilimitado por R$ 149,00/mês. Todos os planos incluem teste grátis por 20 dias.",
+                  text: "Nossos planos começam em R$ 69,90/mês (no plano Anual para 1 usuário). Temos o plano Crescimento a partir de R$ 79,90/mês, o plano Empresarial a partir de R$ 109,90/mês e o plano Ilimitado a partir de R$ 159,90/mês. Todos os planos incluem teste grátis por 20 dias.",
                 },
               },
               {
                 "@type": "Question",
-                name: "Existe desconto para pagamento anual?",
+                name: "Existe desconto para pagamento anual ou semestral?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Sim! Oferecemos 24% de desconto para pagamento anual e 15% de desconto para pagamento semestral em todos os planos.",
+                  text: "Sim! Oferecemos descontos exclusivos nos planos Semestral e Anual para economizar ainda mais na sua assinatura.",
                 },
               },
               {
@@ -409,11 +411,11 @@ const Price = () => {
           {[
             {
               type: "Anual",
-              discount: "24% off",
+              discount: "Mais Vantajoso",
             },
             {
               type: "Semestral",
-              discount: "15% off",
+              discount: "Economia Semestral",
             },
             { type: "Mensal" },
           ].map((plan) => (
@@ -448,7 +450,7 @@ const Price = () => {
                       dailyPrice={getPriceData("Basico").daily}
                       monthlyPrice={getPriceData("Basico").monthlyStr}
                       originalPrice={getPriceData("Basico").originalStr}
-                      showDiscount={planType !== "Mensal"}
+                      showDiscount={getPriceData("Basico").hasDiscount}
                     />
                     <button
                       className="sign-button"
@@ -464,12 +466,12 @@ const Price = () => {
                   <div className="pricing-table-popular-badge">⭐ Mais Popular</div>
                   <div className="pricing-table-header-content">
                     <h3>Crescimento</h3>
-                    <span className="pricing-table-user-limit">Até 3 Usuários</span>
+                    <span className="pricing-table-user-limit">2-3 Usuários</span>
                     <PriceTag
                       dailyPrice={getPriceData("Standard").daily}
                       monthlyPrice={getPriceData("Standard").monthlyStr}
                       originalPrice={getPriceData("Standard").originalStr}
-                      showDiscount={planType !== "Mensal"}
+                      showDiscount={getPriceData("Standard").hasDiscount}
                     />
                     <button
                       className="sign-button"
@@ -484,12 +486,12 @@ const Price = () => {
                 <th className="pricing-table-plan-col">
                   <div className="pricing-table-header-content">
                     <h3>Empresarial</h3>
-                    <span className="pricing-table-user-limit">Até 10 Usuários</span>
+                    <span className="pricing-table-user-limit">4-6 Usuários</span>
                     <PriceTag
                       dailyPrice={getPriceData("Premium").daily}
                       monthlyPrice={getPriceData("Premium").monthlyStr}
                       originalPrice={getPriceData("Premium").originalStr}
-                      showDiscount={planType !== "Mensal"}
+                      showDiscount={getPriceData("Premium").hasDiscount}
                     />
                     <button
                       className="sign-button"
@@ -509,7 +511,7 @@ const Price = () => {
                       dailyPrice={getPriceData("Ilimitado").daily}
                       monthlyPrice={getPriceData("Ilimitado").monthlyStr}
                       originalPrice={getPriceData("Ilimitado").originalStr}
-                      showDiscount={planType !== "Mensal"}
+                      showDiscount={getPriceData("Ilimitado").hasDiscount}
                     />
                     <button
                       className="sign-button"
@@ -542,6 +544,34 @@ const Price = () => {
               ))}
             </tbody>
           </table>
+        </div>
+        
+        {/* Seção de Implantação e Importação de Dados */}
+        <div className="implementation-cta">
+          <div className="implementation-cta-inner">
+            <div className="implementation-badge">
+              📦 Migração de Sistema sem Complicação
+            </div>
+            <h2>Vem de outro sistema? Importamos seus dados!</h2>
+            <p>
+              Facilitamos sua transição para o Gestão Boa. Nossa equipe realiza a <strong>implantação personalizada</strong> e a <strong>importação completa dos seus dados</strong> do sistema anterior (clientes, serviços, produtos e históricos) para você não perder nada.
+            </p>
+            <div className="implementation-cta-actions">
+              <button
+                className="implementation-button"
+                onClick={() => {
+                  window.open(
+                    "https://wa.me/5553999461550?text=" +
+                      encodeURIComponent(
+                        "Olá! Gostaria de solicitar a implantação com importação dos dados do meu sistema anterior."
+                      )
+                  );
+                }}
+              >
+                Solicitar Implantação com Importação de Dados
+              </button>
+            </div>
+          </div>
         </div>
         <RoiCalculator />
         <div className="support-section">
