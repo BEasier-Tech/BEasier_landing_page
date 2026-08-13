@@ -224,29 +224,47 @@ export const Banner = styled.div`
     font-weight: 500;
   }
 
-  .images {
+  .hero-showcase-container {
     display: flex;
     position: relative;
-    width: fit-content;
-    height: 500px;
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
     align-items: center;
     justify-content: center;
     margin-top: 40px;
-  }
+    padding: 0 10px;
 
-  .images .cellphone {
-    position: relative;
-    z-index: 100;
-    height: 500px;
-    width: auto;
-    animation: ${levitate} 6s ease-in-out infinite;
-    filter: drop-shadow(0 30px 40px rgba(3, 4, 94, 0.12));
-  }
+    .showcase-glow-flare {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      height: 80%;
+      background: radial-gradient(ellipse at center, rgba(0, 180, 216, 0.2) 0%, rgba(3, 4, 94, 0.05) 50%, transparent 80%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 1;
+    }
 
-  .images .elipse {
-    position: absolute;
-    height: 100%;
-    z-index: 1;
+    .hero-dashboard-img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: auto;
+      max-height: 580px;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 119, 182, 0.16);
+      animation: ${levitate} 7s ease-in-out infinite;
+      transition: transform 0.4s ease;
+
+      &:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 35px 80px rgba(0, 180, 216, 0.25);
+      }
+    }
   }
 
   @media (max-width: 1780px) {
@@ -255,12 +273,8 @@ export const Banner = styled.div`
       max-width: 800px;
     }
 
-    .images {
-      height: 460px;
-    }
-
-    .images .cellphone {
-      height: 460px;
+    .hero-showcase-container {
+      max-width: 940px;
     }
   }
 
@@ -272,12 +286,8 @@ export const Banner = styled.div`
       max-width: 700px;
     }
 
-    .images {
-      height: 420px;
-    }
-
-    .images .cellphone {
-      height: 420px;
+    .hero-showcase-container {
+      max-width: 840px;
     }
   }
 
@@ -293,17 +303,17 @@ export const Banner = styled.div`
       font-size: 1.05rem;
     }
 
-    .images {
-      height: 380px;
+    .hero-showcase-container {
+      max-width: 100%;
       margin-top: 30px;
-    }
 
-    .images .cellphone {
-      height: 380px;
-    }
+      .showcase-window .showcase-window-header {
+        padding: 10px 14px;
 
-    .images .elipse {
-      display: none;
+        .window-status {
+          display: none;
+        }
+      }
     }
   }
 
@@ -318,12 +328,8 @@ export const Banner = styled.div`
       font-size: 1rem;
     }
 
-    .images {
-      height: 340px;
-    }
-
-    .images .cellphone {
-      height: 340px;
+    .hero-showcase-container {
+      margin-top: 24px;
     }
   }
 
@@ -353,13 +359,22 @@ export const Banner = styled.div`
       min-width: unset;
     }
 
-    .images {
-      height: 300px;
-      margin-top: 24px;
-    }
+    .hero-showcase-container {
+      margin-top: 20px;
+      padding: 0;
 
-    .images .cellphone {
-      height: 300px;
+      .showcase-window {
+        border-radius: 14px;
+
+        .showcase-window-header {
+          padding: 8px 12px;
+
+          .window-address-bar {
+            font-size: 0.72rem;
+            padding: 4px 12px;
+          }
+        }
+      }
     }
   }
 `;
@@ -2621,58 +2636,87 @@ export const FeatureHub = styled.section`
     }
   }
 
-  .feature-preview-card {
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+  .feature-image-wrapper {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
 
-    .preview-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #f1f5f9;
-      padding-bottom: 14px;
+    .feature-phone-mockup {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      background: #0f172a;
+      border-radius: 40px;
+      padding: 28px 10px 18px;
+      box-shadow: 0 30px 70px -10px rgba(3, 4, 94, 0.22), 0 0 0 2px rgba(255, 255, 255, 0.2) inset;
+      border: 3px solid #1e293b;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: ${levitate} 7s ease-in-out infinite;
 
-      span.title {
-        font-weight: 800;
-        color: #0f172a;
-        font-size: 1.15rem;
+      &:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 40px 90px -15px rgba(0, 180, 216, 0.3);
       }
 
-      span.status {
-        background: #dbeafe;
-        color: #1d4ed8;
-        font-size: 0.8rem;
-        font-weight: 700;
-        padding: 4px 12px;
-        border-radius: 50px;
+      .phone-notch {
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 14px;
+        background: #000000;
+        border-radius: 12px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0 10px;
+
+        .camera-lens {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #1e293b;
+        }
+
+        .speaker-bar {
+          width: 28px;
+          height: 2px;
+          border-radius: 2px;
+          background: #1e293b;
+        }
       }
-    }
 
-    .preview-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #f8fafc;
-      padding: 14px 18px;
-      border-radius: 14px;
-      border: 1px solid #e2e8f0;
+      .phone-screen {
+        width: 100%;
+        background: #ffffff;
+        border-radius: 24px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-      .item-name {
-        font-weight: 600;
-        color: #334155;
-        font-size: 0.95rem;
+        .feature-screenshot-img {
+          width: 100%;
+          height: auto;
+          max-height: 560px;
+          object-fit: contain;
+          display: block;
+        }
       }
 
-      .item-val {
-        font-weight: 700;
-        color: #0077b6;
-        font-size: 0.95rem;
+      .phone-home-bar {
+        position: absolute;
+        bottom: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+        z-index: 20;
       }
     }
   }

@@ -443,10 +443,10 @@ const SalaoEstetica: React.FC = () => {
                   </div>
                   <div>
                     <strong style={{ display: "block", color: "#0f172a" }}>
-                      Fernanda Silva
+                      Marcela
                     </strong>
                     <span style={{ fontSize: "0.9rem", color: "#64748b" }}>
-                      Studio Fernanda Hair
+                      Studio Lion
                     </span>
                   </div>
                 </div>

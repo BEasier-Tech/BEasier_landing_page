@@ -71,13 +71,8 @@ const Home: FunctionComponent = () => {
         "Agenda sincronizada por profissional e sala",
         "Bloqueio de horários e feriados personalizado",
       ],
-      previewTitle: "Agenda do Dia • Salão & Studio",
-      previewStatus: "🟢 82% Ocupada",
-      previewItems: [
-        { name: "Corte + Escova (Fernanda S.)", val: "14:00 - Confirmado" },
-        { name: "Manicure (Camila M.)", val: "15:30 - WhatsApp Enviado" },
-        { name: "Barba + Cabelo (Lucas P.)", val: "17:00 - Confirmado" },
-      ],
+      image: "/Agenda.png",
+      imageAlt: "Tela do App de Agendamento Online e Calendário Inteligente",
     },
     {
       id: "crm",
@@ -92,13 +87,8 @@ const Home: FunctionComponent = () => {
         "Mensagens automáticas de aniversário e retorno",
         "Cadastro rápido e exportação segura",
       ],
-      previewTitle: "Ficha do Cliente • Maria Oliveira",
-      previewStatus: "⭐ Cliente VIP",
-      previewItems: [
-        { name: "Última Visita", val: "12/07/2026 (Mechas)" },
-        { name: "Frequência Média", val: "A cada 21 dias" },
-        { name: "Gasto Total", val: "R$ 1.450,00" },
-      ],
+      image: "/Clientes.jpeg",
+      imageAlt: "Tela de Gestão de Clientes e CRM do Gestão Boa",
     },
     {
       id: "estoque",
@@ -113,13 +103,8 @@ const Home: FunctionComponent = () => {
         "Relatório de lucratividade por produto",
         "Gestão de fornecedores e custos",
       ],
-      previewTitle: "Estoque em Tempo Real",
-      previewStatus: "📦 45 Itens",
-      previewItems: [
-        { name: "Shampoo Pós-Química 500ml", val: "12 un (OK)" },
-        { name: "Óleo Reparador de Pontas", val: "2 un (Alerta Mínimo)" },
-        { name: "Tinta Louro Claríssimo", val: "8 un (OK)" },
-      ],
+      image: "/alerta.png",
+      imageAlt: "Tela de Controle de Estoque e Alertas de Produtos",
     },
     {
       id: "marketing",
@@ -134,13 +119,8 @@ const Home: FunctionComponent = () => {
         "Google Meu Negócio & Link no WhatsApp",
         "Promoções e cupons de desconto",
       ],
-      previewTitle: "Página de Agendamento Online",
-      previewStatus: "🚀 Ativa 24h",
-      previewItems: [
-        { name: "Visualizações da Página", val: "+1.240 este mês" },
-        { name: "Agendamentos Convertidos", val: "184 agendamentos" },
-        { name: "Taxa de Conversão", val: "38.5%" },
-      ],
+      image: "/Muitos_Agendamentos.png",
+      imageAlt: "Página de Agendamento Online e Divulgação no Link da Bio",
     },
     {
       id: "pagamentos",
@@ -155,13 +135,8 @@ const Home: FunctionComponent = () => {
         "Registro de métodos de pagamento (Pix, Cartão, Dinheiro)",
         "Controle de contas a pagar e receber",
       ],
-      previewTitle: "Resumo Financeiro do Dia",
-      previewStatus: "💰 Caixa Aberto",
-      previewItems: [
-        { name: "Faturamento Bruto", val: "R$ 2.340,00" },
-        { name: "Comissões da Equipe", val: "R$ 936,00 (40%)" },
-        { name: "Lucro Líquido", val: "R$ 1.404,00" },
-      ],
+      image: "/comissões.png",
+      imageAlt: "Tela de Controle Financeiro, Caixa e Cálculo de Comissões",
     },
     {
       id: "relatorios",
@@ -176,13 +151,8 @@ const Home: FunctionComponent = () => {
         "Comparativo de faturamento mensal e anual",
         "Exportação simplificada para contabilidade",
       ],
-      previewTitle: "Desempenho Geral",
-      previewStatus: "📈 +32% vs Mês Anterior",
-      previewItems: [
-        { name: "Ticket Médio por Cliente", val: "R$ 145,00" },
-        { name: "Serviço Mais Vendido", val: "Corte + Barba" },
-        { name: "Profissional Destaque", val: "Lucas (48 atendimentos)" },
-      ],
+      image: "/Caixa.png",
+      imageAlt: "Dashboard de Relatórios Financeiros e Faturamento",
     },
   ];
 
@@ -526,7 +496,7 @@ const Home: FunctionComponent = () => {
 
           {/* Schema.org structured data - Otimizado */}
           <script type="application/ld+json">
-            {`{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Gestão Boa","description":"Sistema de Gestão completo com agendamentos, controle financeiro, CRM, estoque e comissões","url":"https://gestaoboa.com.br","applicationCategory":"BusinessApplication","offers":{"@type":"Offer","price":"49.90","priceCurrency":"BRL"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"500"},"review":[{"@type":"Review","author":{"@type":"Person","name":"Fernanda Silva","jobTitle":"Proprietária do Studio Fernanda Hair","image":"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop&crop=face"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"O sistema mudou completamente a organização do meu salão. Minhas clientes adoram agendar online pelo link e eu não preciso mais ficar atendendo WhatsApp o dia inteiro. Recomendo muito!"},{"@type":"Review","author":{"@type":"Person","name":"Pedro Arthur","jobTitle":"Proprietário da Prime Barbershop","image":"https://gestaoboa.com.br/PedroArthur.jpg"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"O app da gestão boa vem me ajudando muito desde o primeiro dia, consigo saber com exatidão quantos clientes eu tenho e atendo, faturamento, venda de produtos, etc."},{"@type":"Review","author":{"@type":"Person","name":"Gustavo Fonseca","jobTitle":"Barbeiro"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"Fora de série, fora de série mesmo! Eu te chamo, tu me responde. Tinha muito receio, pois já contratei outros serviços e não tinha esse retorno pra tirar minhas dúvidas. Tu responde, tira minhas dúvidas, não faz corpo mole, e me mostra tudo certinho. Cara, tá show de bola!"}]}`}
+            {`{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Gestão Boa","description":"Sistema de Gestão completo com agendamentos, controle financeiro, CRM, estoque e comissões","url":"https://gestaoboa.com.br","applicationCategory":"BusinessApplication","offers":{"@type":"Offer","price":"49.90","priceCurrency":"BRL"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"500"},"review":[{"@type":"Review","author":{"@type":"Person","name":"Marcela","jobTitle":"Proprietária do Studio Marcela Hair","image":"https://gestaoboa.com.br/Marcela.jpeg"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"O sistema mudou completamente a organização do meu salão. Minhas clientes adoram agendar online pelo link e eu não preciso mais ficar atendendo WhatsApp o dia inteiro. Recomendo muito!"},{"@type":"Review","author":{"@type":"Person","name":"Pedro Arthur","jobTitle":"Proprietário da Prime Barbershop","image":"https://gestaoboa.com.br/PedroArthur.jpg"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"O app da gestão boa vem me ajudando muito desde o primeiro dia, consigo saber com exatidão quantos clientes eu tenho e atendo, faturamento, venda de produtos, etc."},{"@type":"Review","author":{"@type":"Person","name":"Gustavo Fonseca","jobTitle":"Barbeiro"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"Fora de série, fora de série mesmo! Eu te chamo, tu me responde. Tinha muito receio, pois já contratei outros serviços e não tinha esse retorno pra tirar minhas dúvidas. Tu responde, tira minhas dúvidas, não faz corpo mole, e me mostra tudo certinho. Cara, tá show de bola!"}]}`}
           </script>
         </Helmet>
         <Grid>
@@ -609,20 +579,15 @@ const Home: FunctionComponent = () => {
                 ⚡ Teste grátis por 20 dias — Sem cartão de crédito
               </span>
             </div>
-            <div className="images">
+            <div className="hero-showcase-container">
+              <div className="showcase-glow-flare" />
               <img
-                className="cellphone"
-                src="/smartphone.png"
-                alt="Aplicativo Gestão Boa em smartphone mostrando interface de gestão"
+                className="hero-dashboard-img"
+                src="/hero-dashboard.png"
+                alt="Sistema Gestão Boa em Notebook e Smartphone com Agendamentos e Gestão"
                 loading="eager"
-                width="300"
-                height="500"
-              />
-              <img
-                className="elipse"
-                src="/Ellipse.svg"
-                alt="Elemento decorativo"
-                loading="lazy"
+                width="1000"
+                height="650"
               />
             </div>
           </Banner>
@@ -758,17 +723,23 @@ const Home: FunctionComponent = () => {
                 </div>
               </div>
 
-              <div className="feature-preview-card">
-                <div className="preview-header">
-                  <span className="title">{featurePillars[activeFeatureTab].previewTitle}</span>
-                  <span className="status">{featurePillars[activeFeatureTab].previewStatus}</span>
-                </div>
-                {featurePillars[activeFeatureTab].previewItems.map((item, idx) => (
-                  <div key={idx} className="preview-item">
-                    <span className="item-name">{item.name}</span>
-                    <span className="item-val">{item.val}</span>
+              <div className="feature-image-wrapper">
+                <div className="feature-phone-mockup">
+                  <div className="phone-notch">
+                    <span className="camera-lens" />
+                    <span className="speaker-bar" />
                   </div>
-                ))}
+                  <div className="phone-screen">
+                    <img
+                      key={featurePillars[activeFeatureTab].id}
+                      src={featurePillars[activeFeatureTab].image}
+                      alt={featurePillars[activeFeatureTab].imageAlt}
+                      className="feature-screenshot-img"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="phone-home-bar" />
+                </div>
               </div>
             </div>
           </FeatureHub>
@@ -1070,7 +1041,7 @@ const Home: FunctionComponent = () => {
                   </div>
                 </div>
 
-                {/* Depoimento Fernanda Silva */}
+                {/* Depoimento Marcela */}
                 <div
                   className="testimonial-card-new"
                   itemScope
@@ -1079,8 +1050,8 @@ const Home: FunctionComponent = () => {
                   <div className="testimonial-quote">"</div>
                   <div className="testimonial-header">
                     <img
-                      src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop&crop=face"
-                      alt="Fernanda Silva"
+                      src="/Marcela.jpeg"
+                      alt="Marcela"
                       className="testimonial-avatar"
                       itemProp="image"
                       loading="lazy"
@@ -1088,7 +1059,7 @@ const Home: FunctionComponent = () => {
                         const target = e.target as HTMLImageElement;
                         target.onerror = null;
                         target.src =
-                          "https://placehold.co/64x64/007BFF/FFFFFF?text=FS";
+                          "https://placehold.co/64x64/007BFF/FFFFFF?text=M";
                       }}
                     />
                     <div className="testimonial-info">
@@ -1097,9 +1068,9 @@ const Home: FunctionComponent = () => {
                         itemScope
                         itemType="https://schema.org/Person"
                       >
-                        <span itemProp="name">Fernanda Silva</span>
+                        <span itemProp="name">Marcela</span>
                       </h4>
-                      <p itemProp="jobTitle">Proprietária do Studio Fernanda Hair</p>
+                      <p itemProp="jobTitle">Proprietária do Studio Marcela Hair</p>
                     </div>
                   </div>
 
