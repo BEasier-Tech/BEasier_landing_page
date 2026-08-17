@@ -296,17 +296,35 @@ export const VideoTextContent = styled.div`
 `;
 
 export const VideoContainer = styled.div`
-  max-width: 300px;
+  max-width: 270px;
+  width: 100%;
+  margin: 0 auto;
   flex-shrink: 0;
-  border-radius: 24px;
+  border-radius: 32px;
+  padding: 8px;
+  border: 1px solid #334155;
   overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-  background: #000;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  background: #0f172a;
 
   video {
     width: 100%;
+    max-height: 480px;
     height: auto;
     display: block;
+    border-radius: 24px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 240px;
+    padding: 6px;
+    border-radius: 28px;
+
+    video {
+      max-height: 420px;
+      border-radius: 22px;
+    }
   }
 `;
 
@@ -367,20 +385,62 @@ export const PricingSection = styled(SectionBase)`
   }
 `;
 
+export const PlanTypeSelector = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 auto 3rem;
+  flex-wrap: wrap;
+`;
+
+export const PlanTypeButton = styled.button<{ $active: boolean }>`
+  padding: 0.75rem 1.5rem;
+  background-color: ${(props) => (props.$active ? "#3b82f6" : "#1e293b")};
+  border: 2px solid ${(props) => (props.$active ? "#3b82f6" : "#334155")};
+  border-radius: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  &:hover {
+    border-color: #60a5fa;
+    transform: translateY(-2px);
+  }
+`;
+
+export const PlanTypeDiscount = styled.span<{ $active: boolean }>`
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: ${(props) => (props.$active ? "#1e293b" : "#93c5fd")};
+  background-color: ${(props) => (props.$active ? "#ffffff" : "rgba(59, 130, 246, 0.2)")};
+  padding: 2px 8px;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+`;
+
 export const PricingGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1200px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 1360px;
   margin: 0 auto;
   align-items: stretch;
   padding: 0 1rem;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
@@ -392,79 +452,122 @@ export const PlanCard = styled.div<{ $featured?: boolean }>`
       ? "linear-gradient(145deg, #1e293b 0%, #0f172a 100%)"
       : "#1e293b"};
   border: 1px solid ${(props) => (props.$featured ? "#3b82f6" : "#334155")};
-  padding: 2.5rem 2rem;
-  border-radius: 24px;
+  padding: 2.75rem 1.85rem 2.25rem;
+  border-radius: 26px;
   text-align: left;
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
-  min-height: 420px;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 45px -10px rgba(59, 130, 246, 0.25);
   }
 
   ${(props) =>
     props.$featured &&
     css`
-      transform: scale(1.05);
+      transform: scale(1.03);
       z-index: 2;
-      box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
+      box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.3);
 
-      @media (max-width: 1024px) {
+      @media (max-width: 1200px) {
         transform: none;
       }
     `}
 
+  @media (max-width: 1200px) {
+    padding: 2.25rem 1.5rem;
+  }
+
   @media (max-width: 768px) {
-    min-height: auto;
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.25rem;
   }
 `;
 
 export const PlanBadge = styled.span`
   position: absolute;
-  top: -12px;
+  top: -14px;
   left: 50%;
   transform: translateX(-50%);
   background: #3b82f6;
   color: #fff;
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: 20px;
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
 `;
 
 export const PlanName = styled.h3`
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   color: #fff;
 `;
 
+export const PlanUserLimit = styled.span`
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 0.85rem;
+  width: fit-content;
+`;
+
+export const PriceContainer = styled.div`
+  margin-bottom: 1.75rem;
+`;
+
+export const OriginalPriceStrikethrough = styled.div`
+  font-size: 0.88rem;
+  color: #64748b;
+  text-decoration: line-through;
+  margin-bottom: 3px;
+`;
+
 export const PlanPrice = styled.div`
-  font-size: 3rem;
+  font-size: 2.75rem;
   font-weight: 800;
   color: #fff;
-  margin-bottom: 2rem;
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
 
-  span {
+  span.currency {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+
+  span.period {
     font-size: 1rem;
     font-weight: 400;
     color: #94a3b8;
+    margin-left: 4px;
   }
+`;
+
+export const DailyPriceSmall = styled.div`
+  font-size: 0.82rem;
+  color: #94a3b8;
+  margin-top: 5px;
 `;
 
 export const PlanFeatures = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 0 0 2rem 0;
+  margin: 0 0 2.25rem 0;
   flex: 1;
 
   li {
@@ -472,7 +575,8 @@ export const PlanFeatures = styled.ul`
     color: #cbd5e1;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem;
+    font-size: 0.98rem;
 
     svg {
       color: #3b82f6;

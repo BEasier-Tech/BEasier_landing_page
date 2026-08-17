@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
@@ -34,11 +34,18 @@ import {
   SectionTitle,
   SectionSubtitle,
   PricingSection,
+  PlanTypeSelector,
+  PlanTypeButton,
+  PlanTypeDiscount,
   PricingGrid,
   PlanCard,
   PlanBadge,
   PlanName,
+  PlanUserLimit,
+  PriceContainer,
+  OriginalPriceStrikethrough,
   PlanPrice,
+  DailyPriceSmall,
   PlanFeatures,
   TestimonialsSection,
   TestimonialGrid,
@@ -54,8 +61,55 @@ import {
   PlatformBadge,
 } from "./styles";
 
+type PlanPeriod = "Anual" | "Semestral" | "Mensal";
+
+const PLAN_PRICES: Record<
+  PlanPeriod,
+  {
+    basico: number;
+    crescimento: number;
+    empresarial: number;
+    ilimitado: number;
+  }
+> = {
+  Mensal: {
+    basico: 79.9,
+    crescimento: 99.9,
+    empresarial: 129.9,
+    ilimitado: 179.9,
+  },
+  Semestral: {
+    basico: 79.9,
+    crescimento: 89.9,
+    empresarial: 119.9,
+    ilimitado: 169.9,
+  },
+  Anual: {
+    basico: 69.9,
+    crescimento: 79.9,
+    empresarial: 109.9,
+    ilimitado: 159.9,
+  },
+};
+
 const Barbershop: React.FC = () => {
   const navigate = useNavigate();
+  const [planPeriod, setPlanPeriod] = useState<PlanPeriod>("Anual");
+
+  const getPriceInfo = (key: keyof (typeof PLAN_PRICES)["Mensal"]) => {
+    const currentPrice = PLAN_PRICES[planPeriod][key];
+    const monthlyBase = PLAN_PRICES["Mensal"][key];
+    const daily = currentPrice / 30;
+    const monthlyStr = currentPrice.toFixed(2).replace(".", ",");
+    const originalStr = monthlyBase.toFixed(2).replace(".", ",");
+    const hasDiscount = planPeriod !== "Mensal" && currentPrice < monthlyBase;
+    return {
+      dailyStr: daily.toFixed(2).replace(".", ","),
+      monthlyStr,
+      originalStr,
+      hasDiscount,
+    };
+  };
 
   const handleStartFree = () => {
     FB_PIXEL.trackCustomEvent("BarbershopStartFree", {
@@ -140,7 +194,7 @@ const Barbershop: React.FC = () => {
 
             <AuthorityStrip>
               <div>
-                <strong>+R$1.000.000,00</strong>
+                <strong>+R$2.000.000,00</strong>
                 <span>Reais gerenciados</span>
               </div>
               <div>
@@ -284,30 +338,71 @@ const Barbershop: React.FC = () => {
               Escolha a melhor opção para o seu momento. Mude quando quiser.
             </SectionSubtitle>
 
+            {/* Period Selector */}
+            <PlanTypeSelector>
+              {[
+                { type: "Anual" as PlanPeriod, discount: "Mais Vantajoso" },
+                {
+                  type: "Semestral" as PlanPeriod,
+                  discount: "Economia Semestral",
+                },
+                { type: "Mensal" as PlanPeriod },
+              ].map((item) => (
+                <PlanTypeButton
+                  key={item.type}
+                  $active={planPeriod === item.type}
+                  onClick={() => setPlanPeriod(item.type)}
+                >
+                  <span>{item.type}</span>
+                  {item.discount && (
+                    <PlanTypeDiscount $active={planPeriod === item.type}>
+                      {item.discount}
+                    </PlanTypeDiscount>
+                  )}
+                </PlanTypeButton>
+              ))}
+            </PlanTypeSelector>
+
             <PricingGrid>
               {/* PLANO BÁSICO */}
               <PlanCard>
-                <PlanName>Básico</PlanName>
-                <PlanPrice>
-                  R$ 49<span>,90/mês</span>
-                </PlanPrice>
-                <PlanFeatures>
-                  <li>
-                    <CheckCircleIcon width={20} /> Agenda Online 24h
-                  </li>
-                  <li>
-                    <CheckCircleIcon width={20} /> Lembretes via WhatsApp
-                  </li>
-                  <li>
-                    <CheckCircleIcon width={20} /> CRM com Histórico de Clientes
-                  </li>
-                  <li>
-                    <CheckCircleIcon width={20} /> Controle Financeiro
-                  </li>
-                  <li>
-                    <CheckCircleIcon width={20} /> 1 Profissional
-                  </li>
-                </PlanFeatures>
+                <div>
+                  <PlanName>Básico</PlanName>
+                  <PlanUserLimit>1 Profissional</PlanUserLimit>
+                  <PriceContainer>
+                    {getPriceInfo("basico").hasDiscount && (
+                      <OriginalPriceStrikethrough>
+                        De R$ {getPriceInfo("basico").originalStr}/mês por
+                      </OriginalPriceStrikethrough>
+                    )}
+                    <PlanPrice>
+                      <span className="currency">R$</span>
+                      {getPriceInfo("basico").monthlyStr}
+                      <span className="period">/mês</span>
+                    </PlanPrice>
+                    <DailyPriceSmall>
+                      (apenas R$ {getPriceInfo("basico").dailyStr} por dia)
+                    </DailyPriceSmall>
+                  </PriceContainer>
+                  <PlanFeatures>
+                    <li>
+                      <CheckCircleIcon width={20} /> Agenda Online 24h
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> Lembretes via WhatsApp
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> CRM com Histórico de
+                      Clientes
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> Controle Financeiro
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> 1 Profissional
+                    </li>
+                  </PlanFeatures>
+                </div>
                 <Button
                   text="Começar Teste Grátis"
                   method={() => handleSelectPlan("basico")}
@@ -325,28 +420,43 @@ const Barbershop: React.FC = () => {
               {/* PLANO CRESCIMENTO */}
               <PlanCard $featured>
                 <PlanBadge>MAIS POPULAR</PlanBadge>
-                <PlanName>Crescimento</PlanName>
-                <PlanPrice>
-                  R$ 68<span>,90/mês</span>
-                </PlanPrice>
-                <PlanFeatures>
-                  <li>
-                    <CheckCircleIcon width={20} />{" "}
-                    <strong>Tudo do Básico +</strong>
-                  </li>
-                  <li>
-                    <CheckCircleIcon width={20} /> Comissões Automáticas
-                  </li>
-                  <li>
-                    <CheckCircleIcon width={20} /> Gestão de Equipe
-                  </li>
-                  <li>
-                    <CheckCircleIcon width={20} /> Relatórios de Desempenho
-                  </li>
-                  <li>
-                    <CheckCircleIcon width={20} /> Até 3 Profissionais
-                  </li>
-                </PlanFeatures>
+                <div>
+                  <PlanName>Crescimento</PlanName>
+                  <PlanUserLimit>2-3 Profissionais</PlanUserLimit>
+                  <PriceContainer>
+                    {getPriceInfo("crescimento").hasDiscount && (
+                      <OriginalPriceStrikethrough>
+                        De R$ {getPriceInfo("crescimento").originalStr}/mês por
+                      </OriginalPriceStrikethrough>
+                    )}
+                    <PlanPrice>
+                      <span className="currency">R$</span>
+                      {getPriceInfo("crescimento").monthlyStr}
+                      <span className="period">/mês</span>
+                    </PlanPrice>
+                    <DailyPriceSmall>
+                      (apenas R$ {getPriceInfo("crescimento").dailyStr} por dia)
+                    </DailyPriceSmall>
+                  </PriceContainer>
+                  <PlanFeatures>
+                    <li>
+                      <CheckCircleIcon width={20} />{" "}
+                      <strong>Tudo do Básico +</strong>
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> 2 a 3 Profissionais
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> Comissões Automáticas
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> Gestão de Equipe
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> Relatórios de Desempenho
+                    </li>
+                  </PlanFeatures>
+                </div>
                 <Button
                   text="Escolher Plano Crescimento"
                   method={() => handleSelectPlan("crescimento")}
@@ -361,28 +471,100 @@ const Barbershop: React.FC = () => {
 
               {/* PLANO EMPRESARIAL */}
               <PlanCard>
-                <PlanName>Empresarial</PlanName>
-                <PlanPrice>
-                  R$ 99<span>,90/mês</span>
-                </PlanPrice>
-                <PlanFeatures>
-                  <li>
-                    <CheckCircleIcon width={20} />{" "}
-                    <strong>Tudo do Crescimento +</strong>
-                  </li>
-                  <li>
-                    <CheckCircleIcon width={20} /> Profissionais Ilimitados
-                  </li>
-                  <li>
-                    <CheckCircleIcon width={20} /> Gestão Completa de Equipe
-                  </li>
-                  <li>
-                    <CheckCircleIcon width={20} /> Suporte Prioritário
-                  </li>
-                </PlanFeatures>
+                <div>
+                  <PlanName>Empresarial</PlanName>
+                  <PlanUserLimit>4-6 Profissionais</PlanUserLimit>
+                  <PriceContainer>
+                    {getPriceInfo("empresarial").hasDiscount && (
+                      <OriginalPriceStrikethrough>
+                        De R$ {getPriceInfo("empresarial").originalStr}/mês por
+                      </OriginalPriceStrikethrough>
+                    )}
+                    <PlanPrice>
+                      <span className="currency">R$</span>
+                      {getPriceInfo("empresarial").monthlyStr}
+                      <span className="period">/mês</span>
+                    </PlanPrice>
+                    <DailyPriceSmall>
+                      (apenas R$ {getPriceInfo("empresarial").dailyStr} por dia)
+                    </DailyPriceSmall>
+                  </PriceContainer>
+                  <PlanFeatures>
+                    <li>
+                      <CheckCircleIcon width={20} />{" "}
+                      <strong>Tudo do Crescimento +</strong>
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> 4 a 6 Profissionais
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> Gestão Completa de Equipe
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> Relatórios Avançados
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> Suporte Prioritário
+                    </li>
+                  </PlanFeatures>
+                </div>
                 <Button
                   text="Começar Teste Grátis"
                   method={() => handleSelectPlan("empresarial")}
+                  type="clean"
+                  style={{
+                    width: "100%",
+                    border: "1px solid #334155",
+                    color: "white",
+                    padding: "1rem 1.5rem",
+                    fontSize: "1rem",
+                  }}
+                />
+              </PlanCard>
+
+              {/* PLANO ILIMITADO */}
+              <PlanCard>
+                <div>
+                  <PlanName>Ilimitado</PlanName>
+                  <PlanUserLimit>Profissionais Ilimitados</PlanUserLimit>
+                  <PriceContainer>
+                    {getPriceInfo("ilimitado").hasDiscount && (
+                      <OriginalPriceStrikethrough>
+                        De R$ {getPriceInfo("ilimitado").originalStr}/mês por
+                      </OriginalPriceStrikethrough>
+                    )}
+                    <PlanPrice>
+                      <span className="currency">R$</span>
+                      {getPriceInfo("ilimitado").monthlyStr}
+                      <span className="period">/mês</span>
+                    </PlanPrice>
+                    <DailyPriceSmall>
+                      (apenas R$ {getPriceInfo("ilimitado").dailyStr} por dia)
+                    </DailyPriceSmall>
+                  </PriceContainer>
+                  <PlanFeatures>
+                    <li>
+                      <CheckCircleIcon width={20} />{" "}
+                      <strong>Tudo do Empresarial +</strong>
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> Profissionais Ilimitados
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> Gestão de Múltiplas
+                      Cadeiras
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> Relatórios Personalizados
+                    </li>
+                    <li>
+                      <CheckCircleIcon width={20} /> Atendimento & Suporte VIP
+                    </li>
+                  </PlanFeatures>
+                </div>
+                <Button
+                  text="Começar Teste Grátis"
+                  method={() => handleSelectPlan("ilimitado")}
                   type="clean"
                   style={{
                     width: "100%",
