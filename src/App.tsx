@@ -12,6 +12,7 @@ import Terms from "./pages/Terms";
 import BlackFriday from "./pages/BlackFriday";
 import CriarConta from "./pages/CriarConta";
 import BotGestor from "./pages/BotGestor";
+import SincaRS from "./pages/SincaRS";
 import WhatsAppButton from "./components/WhatsAppButton";
 
 function App() {
@@ -29,8 +30,10 @@ function App() {
         <Route path="/salao-estetica" element={<SalaoEstetica />} />
         <Route path="/anuncio-gestaoboa" element={<AnuncioGestaoBoa />} />
         <Route path="/black-friday" element={<BlackFriday/>} />
-        <Route path="/criar-conta" element={<CriarConta />} />
         <Route path="/botgestor" element={<BotGestor />} />
+        <Route path="/SincaRS" element={<SincaRS />} />
+        <Route path="/sincars" element={<SincaRS />} />
+        <Route path="/sinca-rs" element={<SincaRS />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <WhatsAppButton />

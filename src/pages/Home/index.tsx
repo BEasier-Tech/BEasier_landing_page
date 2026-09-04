@@ -557,7 +557,7 @@ const Home: FunctionComponent = () => {
                       <line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
                   </div>
-                  <div className="metric-value">+22.000</div>
+                  <div className="metric-value">+35.000</div>
                   <div className="metric-label">Agendamentos</div>
                   <div className="metric-description">
                     Realizados com sucesso
