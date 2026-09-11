@@ -77,6 +77,17 @@ export default function Header() {
           PLANOS
         </LinkItem>
         <LinkItem
+          href="/influenciador"
+          title="Seja um afiliado Gestão Boa"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/influenciador");
+            trackNavigation("afiliado");
+          }}
+        >
+          SEJA UM AFILIADO
+        </LinkItem>
+        <LinkItem
           href="/sobre"
           title="Conheça nossa equipe"
           data-to-scrollspy-id="team"
@@ -124,6 +135,17 @@ export default function Header() {
           onClick={() => trackNavigation("Planos")}
         >
           PLANOS
+        </LinkItem>
+        <LinkItem
+          href="/influenciador"
+          title="Seja um afiliado Gestão Boa"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/influenciador");
+            trackNavigation("afiliado");
+          }}
+        >
+          SEJA UM AFILIADO
         </LinkItem>
         <LinkItem
           href="/sobre"
