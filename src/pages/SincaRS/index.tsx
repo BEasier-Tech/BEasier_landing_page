@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Button from "../../components/Button";
 import { FB_PIXEL } from "../../utils/pixel";
-import { CheckCircleIcon, StarIcon } from "@heroicons/react/24/solid";
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import {
   CalendarDaysIcon,
   ChatBubbleBottomCenterTextIcon,
@@ -13,8 +13,6 @@ import {
   CurrencyDollarIcon,
   HeartIcon,
   TicketIcon,
-  DevicePhoneMobileIcon,
-  ComputerDesktopIcon,
 } from "@heroicons/react/24/outline";
 
 import {
@@ -61,21 +59,11 @@ import {
   PlanPrice,
   DailyPriceSmall,
   PlanFeatures,
-  TestimonialsSection,
-  TestimonialGrid,
-  TestimonialCard,
-  ReviewsSummary,
   FAQSection,
   FAQContainer,
   FAQCard,
   FinalCTASection,
   MobileFixedCTAButton,
-  VideoSection,
-  VideoWrapper,
-  VideoTextContent,
-  VideoContainer,
-  PlatformBadges,
-  PlatformBadge,
 } from "./styles";
 
 type PlanPeriod = "Anual" | "Semestral" | "Mensal";

@@ -23,13 +23,13 @@ const PLAN_PRICES: Record<
     Ilimitado: 179.90,
   },
   Semestral: {
-    Basico: 79.90,
+    Basico: 69.90,
     Standard: 89.90,
     Premium: 119.90,
     Ilimitado: 169.90,
   },
   Anual: {
-    Basico: 69.90,
+    Basico: 64.90,
     Standard: 79.90,
     Premium: 109.90,
     Ilimitado: 159.90,
