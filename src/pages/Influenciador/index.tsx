@@ -58,7 +58,7 @@ const Influenciador: React.FC = () => {
     return { count, ref };
   };
 
-  const counter1 = useCounter(500, 2000);
+  const counter1 = useCounter(100, 2000);
   const counter2 = useCounter(10, 1500);
   const counter3 = useCounter(50, 1800);
 
@@ -222,8 +222,8 @@ const Influenciador: React.FC = () => {
       {/* ========= STATS BAR ========= */}
       <section className="influenciador-stats">
         <div className="stat-item" ref={counter1.ref}>
-          <div className="stat-number">{counter1.count}+</div>
-          <div className="stat-label">Estabelecimentos ativos</div>
+          <div className="stat-number">+{counter1.count}</div>
+          <div className="stat-label">Profissionais ativos</div>
         </div>
         <div className="stat-item" ref={counter2.ref}>
           <div className="stat-number">{counter2.count}%</div>
@@ -283,20 +283,6 @@ const Influenciador: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* ========= CONTEXT IMAGES (contextual) ========= */}
-      <div className="hero-influencer-img hero-influencer-grid">
-        <img
-          src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=800&h=500&fit=crop&crop=center"
-          alt="Profissional de beleza atendendo em ambiente moderno"
-          loading="lazy"
-        />
-        <img
-          src="https://images.unsplash.com/photo-1585747860019-8e8ef462a2b3?w=800&h=500&fit=crop&crop=center"
-          alt="Barbeiro profissional cortando cabelo em barbearia moderna"
-          loading="lazy"
-        />
-      </div>
 
       {/* ========= FORM ========= */}
       <div className="influenciador-main" ref={formRef}>
