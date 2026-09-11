@@ -84,6 +84,7 @@ const CriarConta: React.FC = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const planParam = searchParams.get("plano") as PlanType | null;
+  const cupomParam = searchParams.get("cupom") || searchParams.get("desconto");
   const plan = planParam && PLAN_CONFIG[planParam] ? planParam : "black-friday";
   const planConfig = PLAN_CONFIG[plan];
 
@@ -103,6 +104,7 @@ const CriarConta: React.FC = () => {
 
   // Company form states
   const [companyName, setCompanyName] = useState("");
+  const [discountCode, setDiscountCode] = useState(cupomParam ? cupomParam.toUpperCase() : "");
   const [selectedCategory, setSelectedCategory] = useState<EnterpriseBranch | null>(null);
   const [selectedScale, setSelectedScale] = useState<typeof SCALE_OPTIONS[0] | null>(null);
   const [categories, setCategories] = useState<EnterpriseBranch[]>([]);
@@ -315,6 +317,7 @@ const CriarConta: React.FC = () => {
         id_scale: Number(selectedScale.id),
         branches: [Number(selectedCategory!.id)],
         image: "",
+        discount_code: discountCode || undefined,
       };
 
       const result = await createCompany(userToken!, companyData);
@@ -399,6 +402,15 @@ const CriarConta: React.FC = () => {
                 placeholder="Ex: Barbearia do João"
                 className="company-input"
                 autoFocus
+              />
+            </div>
+            <div className="input-wrapper" style={{ marginTop: '20px' }}>
+              <input
+                type="text"
+                value={discountCode}
+                onChange={(e) => setDiscountCode(e.target.value)}
+                placeholder="Cupom de Desconto (opcional)"
+                className="company-input"
               />
             </div>
           </div>

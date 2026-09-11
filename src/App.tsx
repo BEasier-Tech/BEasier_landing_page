@@ -13,6 +13,7 @@ import BlackFriday from "./pages/BlackFriday";
 import CriarConta from "./pages/CriarConta";
 import BotGestor from "./pages/BotGestor";
 import SincaRS from "./pages/SincaRS";
+import Influenciador from "./pages/Influenciador";
 import WhatsAppButton from "./components/WhatsAppButton";
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
         <Route path="/SincaRS" element={<SincaRS />} />
         <Route path="/sincars" element={<SincaRS />} />
         <Route path="/sinca-rs" element={<SincaRS />} />
+        <Route path="/criar-conta" element={<CriarConta />} />
+        <Route path="/influenciador" element={<Influenciador />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <WhatsAppButton />

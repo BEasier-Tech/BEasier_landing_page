@@ -167,6 +167,7 @@ interface CreateCompanyData {
   id_scale: number;
   branches: Array<number>;
   image: string;
+  discount_code?: string;
 }
 
 export const createCompany = async (
@@ -195,5 +196,56 @@ export const createCompany = async (
   } catch (error) {
     console.error("Erro na criação da empresa:", error);
     throw error;
+  }
+};
+
+export interface InfluencerData {
+  name: string;
+  surname: string;
+  phone?: string;
+  pix_key?: string;
+  discount_code: string;
+}
+
+export const createInfluencer = async (data: InfluencerData) => {
+  try {
+    const response = await fetch(`${BASE_URL}/influencers/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || result.message || "Erro ao criar influenciador");
+    }
+
+    return result;
+  } catch (error: any) {
+    return { error: error.message };
+  }
+};
+
+export const validateDiscountCode = async (code: string) => {
+  try {
+    const response = await fetch(`${BASE_URL}/influencers/code/${code}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || result.message || "Cupom inválido");
+    }
+
+    return result;
+  } catch (error: any) {
+    return { error: error.message };
   }
 };
