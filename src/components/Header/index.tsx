@@ -162,18 +162,20 @@ export default function Header() {
           CONTATO
         </LinkItem>{" "}
         <ButtonLink
-          href="https://beasier.vercel.app"
+          href="/criar-conta"
           title="Testar o Gestão Boa agora"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             FB_PIXEL.trackCustomEvent("TestNowClick", {
               location: "mobile_menu",
             });
             closeMenu();
+            navigate("/criar-conta");
           }}
         >
           <Button
             width="100%"
-            text="TESTAR AGORA"
+            text="TESTAR GRÁTIS"
             method={() => {}}
             type="focused"
             style={{
@@ -187,11 +189,13 @@ export default function Header() {
       </MobileLinks>{" "}
       <TestNow>
         <ButtonLink
-          href="https://beasier.vercel.app"
+          href="/criar-conta"
           title="Testar o Gestão Boa agora"
-          onClick={() =>
-            FB_PIXEL.trackCustomEvent("TestNowClick", { location: "header" })
-          }
+          onClick={(e) => {
+            e.preventDefault();
+            FB_PIXEL.trackCustomEvent("TestNowClick", { location: "header" });
+            navigate("/criar-conta");
+          }}
         >
           <Button
             width="140px"

@@ -7,7 +7,6 @@ import { Container } from "../Terms/styles";
 import PaymentForm from "./components/PaymentForm";
 import PriceTag from "./components/PriceTag";
 import UserRegistrationForm from "./components/UserRegistrationForm";
-import RoiCalculator from "../../components/RoiCalculator";
 import "./styles.css";
 
 type PlanType = "Anual" | "Semestral" | "Mensal";
@@ -121,7 +120,7 @@ const Price = () => {
         </title>
         <meta
           name="description"
-          content="Planos de sistema de gestão da Gestão Boa a partir de R$ 69,90/mês. Teste grátis por 20 dias! Link de agendamento online, finanças, estoque e muito mais. Compare preços e funcionalidades."
+          content="Planos de sistema de gestão da Gestão Boa a partir de R$ 69,90/mês. Teste grátis por 10 dias! Link de agendamento online, finanças, estoque e muito mais. Compare preços e funcionalidades."
         />
         <meta
           name="keywords"
@@ -139,7 +138,7 @@ const Price = () => {
         />
         <meta
           property="og:description"
-          content="Planos de sistema de gestão da Gestão Boa a partir de R$ 69,90/mês. Teste grátis por 20 dias! Link de agendamento online, finanças, estoque e muito mais."
+          content="Planos de sistema de gestão da Gestão Boa a partir de R$ 69,90/mês. Teste grátis por 10 dias! Link de agendamento online, finanças, estoque e muito mais."
         />
         <meta property="og:url" content="https://gestaoboa.com.br/preco" />
         <meta property="og:site_name" content="Gestão Boa" />
@@ -163,7 +162,7 @@ const Price = () => {
         />
         <meta
           name="twitter:description"
-          content="Planos de sistema de gestão da Gestão Boa a partir de R$ 69,90/mês. Teste grátis por 20 dias!"
+          content="Planos de sistema de gestão da Gestão Boa a partir de R$ 69,90/mês. Teste grátis por 10 dias!"
         />
         <meta
           name="twitter:image"
@@ -185,7 +184,7 @@ const Price = () => {
             "@type": "WebPage",
             name: "Planos e Preços - Gestão Boa",
             description:
-              "Planos de sistema de gestão da Gestão Boa com preços acessíveis e teste grátis por 20 dias",
+              "Planos de sistema de gestão da Gestão Boa com preços acessíveis e teste grátis por 10 dias",
             url: "https://gestaoboa.com.br/preco",
             provider: {
               "@type": "Organization",
@@ -363,7 +362,7 @@ const Price = () => {
                 name: "Qual é o valor dos planos da Gestão Boa?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Nossos planos começam em R$ 69,90/mês (no plano Anual para 1 usuário). Temos o plano Crescimento a partir de R$ 79,90/mês, o plano Empresarial a partir de R$ 109,90/mês e o plano Ilimitado a partir de R$ 159,90/mês. Todos os planos incluem teste grátis por 20 dias.",
+                  text: "Nossos planos começam em R$ 69,90/mês (no plano Anual para 1 usuário). Temos o plano Crescimento a partir de R$ 79,90/mês, o plano Empresarial a partir de R$ 109,90/mês e o plano Ilimitado a partir de R$ 159,90/mês. Todos os planos incluem teste grátis por 10 dias.",
                 },
               },
               {
@@ -376,10 +375,10 @@ const Price = () => {
               },
               {
                 "@type": "Question",
-                name: "Como funciona o teste grátis de 20 dias?",
+                name: "Como funciona o teste grátis de 10 dias?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Você pode testar todas as funcionalidades do seu plano escolhido por 20 dias sem compromisso. Não é necessário cartão de crédito para iniciar o teste.",
+                  text: "Você pode testar todas as funcionalidades do seu plano escolhido por 10 dias sem compromisso. Não é necessário cartão de crédito para iniciar o teste.",
                 },
               },
               {
@@ -573,7 +572,6 @@ const Price = () => {
             </div>
           </div>
         </div>
-        <RoiCalculator />
         <div className="support-section">
           <h2>Ainda tem dúvidas sobre os preços?</h2>
           <p>Fale com nosso atendimento especializado</p>

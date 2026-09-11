@@ -322,7 +322,7 @@ export default function Sales() {
 
           <div className="text-center mt-16 fade-in-up" ref={addToRefs}>
             <p className="text-lg text-gray-600 mb-6">
-              ✅ 7 dias de teste grátis • ✅ Sem taxa de setup • ✅ Cancele quando quiser
+              ✅ 10 dias de teste grátis • ✅ Sem taxa de setup • ✅ Cancele quando quiser
             </p>
             <div className="bg-red-100 border border-red-300 rounded-xl p-8 max-w-2xl mx-auto shadow-warm">
               <p className="text-red-800 font-semibold text-lg">

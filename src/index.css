@@ -18,3 +18,7 @@ body {
 img {
     image-rendering: optimizeSpeed;
 }
+
+input, textarea, select {
+    color-scheme: light;
+}

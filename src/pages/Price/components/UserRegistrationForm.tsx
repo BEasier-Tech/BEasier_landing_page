@@ -315,7 +315,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
           <>
             <h2>Teste Grátis - Plano {planName}</h2>
             <p className="registration-form-description">
-              Preencha seus dados para iniciar o período de teste de 21 dias
+              Preencha seus dados para iniciar o período de teste de 10 dias
             </p>
 
             <form onSubmit={handleSubmit}>

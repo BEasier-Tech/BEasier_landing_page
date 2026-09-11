@@ -598,6 +598,40 @@
   line-height: 1.5;
 }
 
+.influenciador-form .checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.influenciador-form .checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #3b82f6;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.influenciador-form .checkbox-group label {
+  font-size: 14px;
+  color: #cbd5e1;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1.4;
+}
+
+.influenciador-form .checkbox-group label a {
+  color: #60a5fa;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.influenciador-form .checkbox-group label a:hover {
+  color: #93c5fd;
+}
+
 .submit-button {
   background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
   color: white;

@@ -252,7 +252,7 @@ const SincaRS: React.FC = () => {
                 name: "Como ativar o desconto de associado Sinca RS?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Basta acessar a página oficial da parceria (gestaoboa.com.br/sincars), iniciar o teste gratuito de 20 dias e selecionar o plano com desconto garantido.",
+                  text: "Basta acessar a página oficial da parceria (gestaoboa.com.br/sincars), iniciar o teste gratuito de 10 dias e selecionar o plano com desconto garantido.",
                 },
               },
             ],
@@ -306,7 +306,7 @@ const SincaRS: React.FC = () => {
                   fontSize: "0.9rem",
                 }}
               >
-                ✨ Teste grátis por 20 dias • Sem cartão de crédito
+                ✨ Teste grátis por 10 dias • Sem cartão de crédito
               </p>
             </div>
 
@@ -942,7 +942,7 @@ const SincaRS: React.FC = () => {
               <FAQCard>
                 <h3>🎁 Como ativar o desconto de associado Sinca RS?</h3>
                 <p>
-                  É simples e rápido: basta clicar em qualquer botão de teste grátis nesta página. Você terá <strong>20 dias de teste gratuito sem compromisso</strong> e o desconto especial de associado Sinca RS / Fecomércio será aplicado diretamente na sua conta.
+                  É simples e rápido: basta clicar em qualquer botão de teste grátis nesta página. Você terá <strong>10 dias de teste gratuito sem compromisso</strong> e o desconto especial de associado Sinca RS / Fecomércio será aplicado diretamente na sua conta.
                 </p>
               </FAQCard>
             </FAQContainer>
@@ -951,7 +951,7 @@ const SincaRS: React.FC = () => {
           {/* FINAL CTA */}
           <FinalCTASection>
             <h2>Aproveite as vantagens do Sinca RS.</h2>
-            <p>Teste gratuito de 20 dias. Sem compromisso.</p>
+            <p>Teste gratuito de 10 dias. Sem compromisso.</p>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button
                 text="Criar Minha Conta Grátis"

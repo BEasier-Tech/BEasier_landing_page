@@ -13,6 +13,7 @@
   background: linear-gradient(135deg, #f0f4f8 0%, #e1e8f0 100%);
   display: flex;
   flex-direction: column;
+  color-scheme: light;
 }
 
 /* ============================
@@ -39,6 +40,35 @@
 .logo img {
   height: 40px;
   filter: brightness(0) invert(1);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.app-store-header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.app-store-header-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+  color: #ffffff;
 }
 
 .plan-badge {
@@ -190,6 +220,74 @@
   color: #6c757d;
   font-size: 0.9rem;
   margin: 0;
+}
+
+.app-download-box {
+  margin-top: 24px;
+  padding: 18px 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e1e8f0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.app-download-info strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #03045e;
+  margin-bottom: 4px;
+}
+
+.app-download-info p {
+  font-size: 0.82rem;
+  color: #6c757d;
+  margin: 0;
+}
+
+.app-store-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #000000;
+  color: #ffffff !important;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.app-store-badge-btn:hover {
+  background: #1f1f1f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  color: #ffffff !important;
+}
+
+.app-store-btn-labels {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.1;
+}
+
+.app-store-sub {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+.app-store-main {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
 }
 
 /* ============================
@@ -362,12 +460,15 @@
   border: 2px solid #e9ecef;
   border-radius: 10px;
   font-size: 1rem;
+  background-color: #ffffff;
+  color: #1a1a1a;
   transition: all 0.3s ease;
   outline: none;
 }
 
 .form-group input:focus {
   border-color: #0077b6;
+  background-color: #ffffff;
   box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1);
 }
 
@@ -375,7 +476,21 @@
   color: #adb5bd;
 }
 
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+  box-shadow: 0 0 0px 1000px #ffffff inset !important;
+}
+
 /* Checkbox */
+.terms-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .checkbox-group {
   display: flex;
   align-items: flex-start;
@@ -391,10 +506,19 @@
   cursor: pointer;
 }
 
+.checkbox-group.checkbox-group-error input[type="checkbox"] {
+  outline: 2px solid #dc3545;
+  outline-offset: 2px;
+}
+
 .checkbox-group label {
   font-size: 0.85rem;
   color: #6c757d;
   line-height: 1.4;
+}
+
+.checkbox-group.checkbox-group-error label {
+  color: #dc3545;
 }
 
 .checkbox-group label a {
@@ -406,7 +530,32 @@
   text-decoration: underline;
 }
 
-/* Error Message */
+/* Error Message & Field Errors */
+.form-group input.input-error {
+  border-color: #dc3545 !important;
+  background-color: #fff8f8 !important;
+}
+
+.form-group input.input-error:focus {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15) !important;
+}
+
+.field-error-text {
+  color: #dc3545;
+  font-size: 0.82rem;
+  margin-top: 4px;
+  display: block;
+}
+
+.terms-error-text {
+  color: #dc3545;
+  font-size: 0.82rem;
+  margin-top: 4px;
+  font-weight: 500;
+  display: block;
+}
+
 .error-message {
   background: rgba(220, 53, 69, 0.1);
   border: 1px solid rgba(220, 53, 69, 0.3);
@@ -546,7 +695,7 @@
   border: 3px solid #e9ecef;
   border-radius: 16px;
   color: #03045e;
-  background: #f8f9fa;
+  background: #ffffff;
   transition: all 0.3s ease;
   outline: none;
 }
@@ -691,13 +840,24 @@
   border-radius: 12px;
   font-size: 1rem;
   text-align: center;
+  background-color: #ffffff;
+  color: #1a1a1a;
   transition: all 0.3s ease;
   outline: none;
 }
 
 .company-input:focus {
   border-color: #0077b6;
+  background-color: #ffffff;
   box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1);
+}
+
+.company-input:-webkit-autofill,
+.company-input:-webkit-autofill:hover,
+.company-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #1a1a1a !important;
+  box-shadow: 0 0 0px 1000px #ffffff inset !important;
 }
 
 /* Options Grid */
@@ -762,11 +922,19 @@
    LOGIN LINK
    ============================ */
 
+.signup-bottom-links {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
 .login-link {
   text-align: center;
-  margin-top: 20px;
   font-size: 0.9rem;
   color: #6c757d;
+  margin: 0;
 }
 
 .login-link a {
@@ -777,6 +945,30 @@
 
 .login-link a:hover {
   text-decoration: underline;
+}
+
+.ios-app-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #03045e;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 50px;
+  background: #ffffff;
+  border: 1px solid #d0dbe5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.ios-app-link:hover {
+  background: #f0f6fc;
+  border-color: #0077b6;
+  color: #0077b6;
+  transform: translateY(-1px);
+  text-decoration: none;
 }
 
 /* ============================
@@ -849,6 +1041,18 @@
   .header-content {
     flex-direction: column;
     gap: 12px;
+  }
+
+  .header-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .app-download-box {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
   }
 
   .plan-badge {

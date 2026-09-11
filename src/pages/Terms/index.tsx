@@ -163,7 +163,7 @@ const Terms: FunctionComponent = () => {
           <p>
             <b>
               3.5 Todos os planos de assinatura de licenciamento do sistema
-              “GESTÃO BOA” oferecerão prazo de carência de 21 (vinte e um) dias
+              “GESTÃO BOA” oferecerão prazo de carência de 10 (dez) dias
               para uso de todas as funcionalidades previstas no plano sem nenhum
               custo para a empresa, com objetivo de avaliação da plataforma e
               suas ferramentas.

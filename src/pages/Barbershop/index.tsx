@@ -59,6 +59,20 @@ import {
   VideoContainer,
   PlatformBadges,
   PlatformBadge,
+  WhatsAppSection,
+  WhatsAppContent,
+  WhatsAppBadge,
+  WhatsAppHeading,
+  WhatsAppDescription,
+  WhatsAppCounter,
+  WhatsAppFeatures,
+  WhatsAppFeatureCard,
+  WhatsAppCTA,
+  WhatsAppMockupContainer,
+  WAChatMockup,
+  WAChatHeader,
+  WAChatBody,
+  WABubble,
 } from "./styles";
 
 type PlanPeriod = "Anual" | "Semestral" | "Mensal";
@@ -188,7 +202,7 @@ const Barbershop: React.FC = () => {
                   fontSize: "0.9rem",
                 }}
               >
-                ✨ Teste grátis por 20 dias • Sem cartão de crédito
+                ✨ Teste grátis por 10 dias • Sem cartão de crédito
               </p>
             </div>
 
@@ -284,6 +298,150 @@ const Barbershop: React.FC = () => {
             </EssentialsGrid>
           </EssentialsSection>
 
+          {/* ===== WHATSAPP HERO SECTION ===== */}
+          <WhatsAppSection id="whatsapp-automacao">
+            <div className="whatsapp-inner">
+              <WhatsAppContent>
+                <WhatsAppBadge>🤖 Automação WhatsApp para Barbearias</WhatsAppBadge>
+                <WhatsAppHeading>
+                  Sua barbearia no <span>piloto automático</span> pelo WhatsApp
+                </WhatsAppHeading>
+                <WhatsAppDescription>
+                  O Gestão Boa envia mensagens automáticas pelo WhatsApp para seus clientes:
+                  lembretes de corte e barba, feliz aniversário com cupom, aviso ao barbeiro e
+                  convite de retorno. Tudo sem você precisar digitar uma única mensagem ou pausar o corte.
+                </WhatsAppDescription>
+
+                <WhatsAppCounter>
+                  <div className="counter-number">+20.000</div>
+                  <div className="counter-label">
+                    mensagens WhatsApp<br />enviadas automaticamente
+                  </div>
+                </WhatsAppCounter>
+
+                <WhatsAppFeatures>
+                  <WhatsAppFeatureCard>
+                    <div className="feature-icon">⏰</div>
+                    <div className="feature-title">Lembrete de Horário</div>
+                    <div className="feature-desc">Cliente lembrado 1 dia antes. Reduza até 90% das faltas e cadeiras vazias.</div>
+                  </WhatsAppFeatureCard>
+                  <WhatsAppFeatureCard>
+                    <div className="feature-icon">🎂</div>
+                    <div className="feature-title">Feliz Aniversário</div>
+                    <div className="feature-desc">Mensagem automática com cupom de desconto exclusivo no dia especial do cliente.</div>
+                  </WhatsAppFeatureCard>
+                  <WhatsAppFeatureCard>
+                    <div className="feature-icon">📣</div>
+                    <div className="feature-title">Aviso ao Barbeiro</div>
+                    <div className="feature-desc">Barbeiro notificado no WhatsApp na hora que um cliente agenda pelo seu link.</div>
+                  </WhatsAppFeatureCard>
+                  <WhatsAppFeatureCard>
+                    <div className="feature-icon">🔄</div>
+                    <div className="feature-title">Convite de Retorno</div>
+                    <div className="feature-desc">Reativa clientes que não cortam o cabelo há mais de 20 ou 30 dias automaticamente.</div>
+                  </WhatsAppFeatureCard>
+                </WhatsAppFeatures>
+
+                <WhatsAppCTA
+                  href="/criar-conta"
+                  title="Quero automatizar minha barbearia"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/criar-conta");
+                  }}
+                >
+                  Quero automatizar minha barbearia →
+                </WhatsAppCTA>
+              </WhatsAppContent>
+
+              <WhatsAppMockupContainer>
+                <WAChatMockup>
+                  <div className="phone-notch" />
+                  <div className="phone-screen">
+                    <WAChatHeader>
+                      <div className="avatar">GB</div>
+                      <div className="info">
+                        <strong>Barbearia Gestão Boa 💈</strong>
+                        <span>• Online agora</span>
+                      </div>
+                      <span className="bot-tag">Automático</span>
+                    </WAChatHeader>
+
+                    <WAChatBody>
+                      {/* Bubble 1: Lembrete de Agendamento */}
+                      <WABubble>
+                        <span className="bubble-badge">⏰ Lembrete de Horário</span>
+                        <div>
+                          Fala, <strong>Lucas</strong>! 💈 Passando para lembrar do seu horário de{" "}
+                          <strong>Corte & Barba Terapia</strong> amanhã às <strong>15:00</strong> com o barbeiro Bruno.
+                        </div>
+                        <div style={{ marginTop: "6px", fontSize: "0.82rem", color: "#2563eb", fontWeight: 600 }}>
+                          Responda <strong>1</strong> para confirmar ou <strong>2</strong> para reagendar.
+                        </div>
+                        <div className="time">
+                          10:30
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                      </WABubble>
+
+                      {/* Bubble 2: Resposta do Cliente */}
+                      <WABubble $outgoing>
+                        <div>1 - Confirmado, meu irmão! Até amanhã! 👊</div>
+                        <div className="time">
+                          10:32
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                      </WABubble>
+
+                      {/* Bubble 3: Feliz Aniversário */}
+                      <WABubble>
+                        <span
+                          className="bubble-badge"
+                          style={{
+                            background: "#fef3c7",
+                            color: "#b45309",
+                          }}
+                        >
+                          🎂 Feliz Aniversário!
+                        </span>
+                        <div>
+                          🎉 Parabéns, <strong>Lucas</strong>! Toda a equipe da barbearia te deseja um dia fera!
+                          Preparamos um presente: use o cupom <strong>NIVERVIP</strong> e ganhe{" "}
+                          <strong>15% OFF</strong> na sua próxima visita! 🍺✂️
+                        </div>
+                        <div className="time">
+                          09:00
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                      </WABubble>
+
+                      {/* Bubble 4: Aviso ao Profissional */}
+                      <WABubble>
+                        <span
+                          className="bubble-badge"
+                          style={{
+                            background: "#dbeafe",
+                            color: "#1d4ed8",
+                          }}
+                        >
+                          📣 Novo Agendamento!
+                        </span>
+                        <div>
+                          Ei <strong>Bruno</strong>! ✂️ Novo agendamento confirmado: <strong>Lucas Silva</strong>{" "}
+                          — <strong>Corte & Barba</strong> amanhã às <strong>15:00</strong>.
+                        </div>
+                        <div className="time">
+                          10:33
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                      </WABubble>
+                    </WAChatBody>
+                  </div>
+                </WAChatMockup>
+              </WhatsAppMockupContainer>
+            </div>
+          </WhatsAppSection>
+
           {/* VIDEO DEMO SECTION */}
           <VideoSection>
             <VideoWrapper>
@@ -311,7 +469,7 @@ const Barbershop: React.FC = () => {
                     Android
                   </PlatformBadge>
                   <PlatformBadge
-                    href="https://testflight.apple.com/join/bxbJmd2c"
+                    href="https://apps.apple.com/br/app/gest%C3%A3o-boa/id6741593872"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -657,7 +815,7 @@ const Barbershop: React.FC = () => {
           {/* FINAL CTA */}
           <FinalCTASection>
             <h2>Comece a transformar sua barbearia hoje.</h2>
-            <p>Teste gratuito de 20 dias. Sem compromisso.</p>
+            <p>Teste gratuito de 10 dias. Sem compromisso.</p>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button
                 text="Criar Minha Conta Grátis"

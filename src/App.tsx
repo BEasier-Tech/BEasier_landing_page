@@ -14,11 +14,14 @@ import CriarConta from "./pages/CriarConta";
 import BotGestor from "./pages/BotGestor";
 import SincaRS from "./pages/SincaRS";
 import Influenciador from "./pages/Influenciador";
+import RegulamentoIndicacao from "./pages/RegulamentoIndicacao";
 import WhatsAppButton from "./components/WhatsAppButton";
+import PostHogPageViewTracker from "./components/PostHogPageViewTracker";
 
 function App() {
   return (
     <BrowserRouter>
+      <PostHogPageViewTracker />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/terms" element={<Terms />} />
@@ -37,6 +40,8 @@ function App() {
         <Route path="/sinca-rs" element={<SincaRS />} />
         <Route path="/criar-conta" element={<CriarConta />} />
         <Route path="/influenciador" element={<Influenciador />} />
+        <Route path="/regulamento-indicacao" element={<RegulamentoIndicacao />} />
+        <Route path="/termos-indicacao" element={<RegulamentoIndicacao />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <WhatsAppButton />

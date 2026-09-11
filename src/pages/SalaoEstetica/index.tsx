@@ -71,6 +71,20 @@ import {
   FAQItem,
   FinalCTASection,
   FloatingMobileCTA,
+  WhatsAppSection,
+  WhatsAppContent,
+  WhatsAppBadge,
+  WhatsAppHeading,
+  WhatsAppDescription,
+  WhatsAppCounter,
+  WhatsAppFeatures,
+  WhatsAppFeatureCard,
+  WhatsAppCTA,
+  WhatsAppMockupContainer,
+  WAChatMockup,
+  WAChatHeader,
+  WAChatBody,
+  WABubble,
 } from "./styles";
 
 type PlanPeriod = "Anual" | "Semestral" | "Mensal";
@@ -172,7 +186,7 @@ const SalaoEstetica: React.FC = () => {
         />
         <meta
           property="og:description"
-          content="Menos correria, mais gestão. Mais tempo para o que importa. Automatize seu salão ou clínica de estética com teste grátis por 20 dias."
+          content="Menos correria, mais gestão. Mais tempo para o que importa. Automatize seu salão ou clínica de estética com teste grátis por 10 dias."
         />
         <meta
           property="og:url"
@@ -221,7 +235,7 @@ const SalaoEstetica: React.FC = () => {
 
           <CTAButtonGroup>
             <PrimaryButton onClick={handleStartFree}>
-              <span>Começar Grátis por 20 Dias</span>
+              <span>Começar Grátis por 10 Dias</span>
               <ArrowRightIcon width={20} />
             </PrimaryButton>
 
@@ -231,7 +245,7 @@ const SalaoEstetica: React.FC = () => {
           </CTAButtonGroup>
 
           <GuaranteeNotice>
-            ✨ Teste grátis por 20 dias <span className="dot">•</span> Sem
+            ✨ Teste grátis por 10 dias <span className="dot">•</span> Sem
             cartão de crédito <span className="dot">•</span> Cancele quando
             quiser
           </GuaranteeNotice>
@@ -313,6 +327,150 @@ const SalaoEstetica: React.FC = () => {
             </PillarCard>
           </PillarsGrid>
         </PillarsSection>
+
+        {/* ===== WHATSAPP HERO SECTION ===== */}
+        <WhatsAppSection id="whatsapp-automacao">
+          <div className="whatsapp-inner">
+            <WhatsAppContent>
+              <WhatsAppBadge>✨ Automação WhatsApp para Salões & Estética</WhatsAppBadge>
+              <WhatsAppHeading>
+                Seu salão e clínica no <span>piloto automático</span> pelo WhatsApp
+              </WhatsAppHeading>
+              <WhatsAppDescription>
+                O Gestão Boa cuida da comunicação com suas clientes pelo WhatsApp: confirmações de horário,
+                lembretes inteligentes, parabéns com presente exclusivo e convite para retorno e retoque.
+                Sua recepção livre e sua agenda sempre lotada.
+              </WhatsAppDescription>
+
+              <WhatsAppCounter>
+                <div className="counter-number">+20.000</div>
+                <div className="counter-label">
+                  mensagens WhatsApp<br />enviadas automaticamente
+                </div>
+              </WhatsAppCounter>
+
+              <WhatsAppFeatures>
+                <WhatsAppFeatureCard>
+                  <div className="feature-icon">⏰</div>
+                  <div className="feature-title">Lembrete de Horário</div>
+                  <div className="feature-desc">Cliente lembrada com antecedência. Reduza até 90% dos no-shows e atrasos.</div>
+                </WhatsAppFeatureCard>
+                <WhatsAppFeatureCard>
+                  <div className="feature-icon">🎂</div>
+                  <div className="feature-title">Parabéns & Mimo</div>
+                  <div className="feature-desc">Cupom de desconto exclusivo enviado no dia do aniversário da cliente.</div>
+                </WhatsAppFeatureCard>
+                <WhatsAppFeatureCard>
+                  <div className="feature-icon">📣</div>
+                  <div className="feature-title">Aviso à Profissional</div>
+                  <div className="feature-desc">A profissional recebe no WhatsApp o aviso imediato de cada novo agendamento.</div>
+                </WhatsAppFeatureCard>
+                <WhatsAppFeatureCard>
+                  <div className="feature-icon">🔄</div>
+                  <div className="feature-title">Convite de Retorno</div>
+                  <div className="feature-desc">Convida para manutenção, retoque de raiz ou novo procedimento no tempo ideal.</div>
+                </WhatsAppFeatureCard>
+              </WhatsAppFeatures>
+
+              <WhatsAppCTA
+                href="/criar-conta"
+                title="Quero automatizar meu salão"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/criar-conta");
+                }}
+              >
+                Quero automatizar meu espaço →
+              </WhatsAppCTA>
+            </WhatsAppContent>
+
+            <WhatsAppMockupContainer>
+              <WAChatMockup>
+                <div className="phone-notch" />
+                <div className="phone-screen">
+                  <WAChatHeader>
+                    <div className="avatar">GB</div>
+                    <div className="info">
+                      <strong>Salão & Estética Gestão Boa 🌸</strong>
+                      <span>• Online agora</span>
+                    </div>
+                    <span className="bot-tag">Automático</span>
+                  </WAChatHeader>
+
+                  <WAChatBody>
+                    {/* Bubble 1: Lembrete de Agendamento */}
+                    <WABubble>
+                      <span className="bubble-badge">⏰ Lembrete de Horário</span>
+                      <div>
+                        Olá, <strong>Juliana</strong>! 🌸 Passando para lembrar do seu horário de{" "}
+                        <strong>Mechas & Tratamento Capilar</strong> amanhã às <strong>14:00</strong> com a especialista Camila.
+                      </div>
+                      <div style={{ marginTop: "6px", fontSize: "0.82rem", color: "#1d56c0", fontWeight: 600 }}>
+                        Responda <strong>1</strong> para confirmar ou <strong>2</strong> para reagendar.
+                      </div>
+                      <div className="time">
+                        10:30
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                      </div>
+                    </WABubble>
+
+                    {/* Bubble 2: Resposta do Cliente */}
+                    <WABubble $outgoing>
+                      <div>1 - Confirmadíssimo! Já estou ansiosa! ✨</div>
+                      <div className="time">
+                        10:32
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                      </div>
+                    </WABubble>
+
+                    {/* Bubble 3: Feliz Aniversário */}
+                    <WABubble>
+                      <span
+                        className="bubble-badge"
+                        style={{
+                          background: "#fce7f3",
+                          color: "#be185d",
+                        }}
+                      >
+                        🎂 Feliz Aniversário!
+                      </span>
+                      <div>
+                        🎉 Parabéns, <strong>Juliana</strong>! Toda a equipe te deseja um dia maravilhoso!
+                        Preparamos um mimo: use o cupom <strong>NIVERVIP</strong> e ganhe{" "}
+                        <strong>15% OFF</strong> no seu próximo procedimento! 🥂✨
+                      </div>
+                      <div className="time">
+                        09:00
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                      </div>
+                    </WABubble>
+
+                    {/* Bubble 4: Aviso ao Profissional */}
+                    <WABubble>
+                      <span
+                        className="bubble-badge"
+                        style={{
+                          background: "#e0f2fe",
+                          color: "#0369a1",
+                        }}
+                      >
+                        📣 Novo Agendamento!
+                      </span>
+                      <div>
+                        Ei <strong>Camila</strong>! 💇‍♀️ Novo agendamento confirmado: <strong>Juliana Ramos</strong>{" "}
+                        — <strong>Mechas & Tratamento</strong> amanhã às <strong>14:00</strong>.
+                      </div>
+                      <div className="time">
+                        10:33
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                      </div>
+                    </WABubble>
+                  </WAChatBody>
+                </div>
+              </WAChatMockup>
+            </WhatsAppMockupContainer>
+          </div>
+        </WhatsAppSection>
 
         {/* APP SHOWCASE SECTION */}
         <ShowcaseSection>
@@ -646,7 +804,7 @@ const SalaoEstetica: React.FC = () => {
             <span className="section-tag">Planos Transparentes</span>
             <h2>Escolha a melhor opção para o seu momento</h2>
             <p>
-              Sem taxas escondidas ou fidelidade. Teste gratuitamente por 20
+              Sem taxas escondidas ou fidelidade. Teste gratuitamente por 10
               dias!
             </p>
           </SectionHeader>
@@ -914,10 +1072,10 @@ const SalaoEstetica: React.FC = () => {
 
           <FAQContainer>
             <FAQItem>
-              <summary>Como funciona o teste grátis de 20 dias?</summary>
+              <summary>Como funciona o teste grátis de 10 dias?</summary>
               <p>
                 Você cria sua conta em menos de 1 minuto e tem acesso completo e
-                irrestrito a todas as ferramentas por 20 dias, sem precisar
+                irrestrito a todas as ferramentas por 10 dias, sem precisar
                 cadastrar cartão de crédito.
               </p>
             </FAQItem>
@@ -975,7 +1133,7 @@ const SalaoEstetica: React.FC = () => {
             <span className="gold">faturar mais</span>?
           </h2>
           <p>
-            Experimente o Gestão Boa Salões gratuitamente por 20 dias e veja a
+            Experimente o Gestão Boa Salões gratuitamente por 10 dias e veja a
             diferença na sua rotina desde o primeiro dia.
           </p>
           <div className="cta-box">
@@ -988,7 +1146,7 @@ const SalaoEstetica: React.FC = () => {
 
       {/* MOBILE STICKY BOTTOM BUTTON */}
       <FloatingMobileCTA>
-        <button onClick={handleStartFree}>Experimentar 20 Dias Grátis</button>
+        <button onClick={handleStartFree}>Experimentar 10 Dias Grátis</button>
       </FloatingMobileCTA>
 
       <Footer />

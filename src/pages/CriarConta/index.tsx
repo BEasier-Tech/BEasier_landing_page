@@ -35,6 +35,23 @@ function gtag_report_conversion(url?: string) {
   return false;
 }
 
+const IOS_APP_URL = "https://apps.apple.com/br/app/gest%C3%A3o-boa/id6741593872";
+
+const AppleIcon: React.FC<{ width?: string | number; height?: string | number }> = ({
+  width = 18,
+  height = 18,
+}) => (
+  <svg
+    viewBox="0 0 170 170"
+    width={width}
+    height={height}
+    fill="currentColor"
+    style={{ display: "inline-block", verticalAlign: "middle", flexShrink: 0 }}
+  >
+    <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.08-7.66-7.85-11.87-14.32-6.53-10.01-11.66-20.93-15.38-32.77-3.72-11.84-5.58-23.08-5.58-33.72 0-14.57 3.59-26.68 10.77-36.33 7.18-9.65 16.32-14.61 27.42-14.88 4.69 0 10.03 1.25 16.02 3.75 5.99 2.5 9.68 3.81 11.07 3.93 1.74-.23 5.67-1.63 11.78-4.22 6.11-2.58 11.51-3.79 16.19-3.63 12.3.66 22.09 5.34 29.37 14.06-10.68 6.42-15.91 15.24-15.71 26.47.2 8.71 3.59 16.08 10.18 22.11 6.59 6.03 14.37 9.53 23.33 10.5-2.4 7.41-5.34 14.73-8.83 21.96zM119.22 33.74c0-7.3 2.66-14.18 7.99-20.64 5.33-6.46 11.88-10.74 19.64-12.85-.22 1.31-.44 2.62-.66 3.93-1.09 6.86-3.87 13.34-8.34 19.44-4.47 6.1-9.97 10.46-16.5 13.08-.66-1-1.32-1.98-1.99-2.96h-.14z" />
+  </svg>
+);
+
 type PlanType = "basico" | "crescimento" | "empresarial" | "ilimitado" | "black-friday";
 
 const PLAN_CONFIG: Record<PlanType, {
@@ -101,6 +118,8 @@ const CriarConta: React.FC = () => {
   const [verificationCode, setVerificationCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState(false);
+  const [termsError, setTermsError] = useState(false);
 
   // Company form states
   const [companyName, setCompanyName] = useState("");
@@ -125,19 +144,18 @@ const CriarConta: React.FC = () => {
   }, [currentStep]);
 
   const formatPhone = (value: string) => {
-    const cleaned = value.replace(/\D/g, "");
-    if (cleaned.length <= 11) {
-      let formatted = cleaned;
-      if (cleaned.length > 0) {
-        formatted = `(${cleaned.slice(0, 2)})${cleaned.length > 2 ? " " + cleaned.slice(2) : ""
-          }`;
-      }
-      if (cleaned.length > 7) {
-        formatted = `${formatted.slice(0, 10)}-${formatted.slice(10)}`;
-      }
-      return formatted;
+    const cleaned = value.replace(/\D/g, "").slice(0, 11);
+    if (!cleaned) return "";
+    if (cleaned.length <= 2) {
+      return `(${cleaned}`;
     }
-    return value;
+    if (cleaned.length <= 6) {
+      return `(${cleaned.slice(0, 2)}) ${cleaned.slice(2)}`;
+    }
+    if (cleaned.length <= 10) {
+      return `(${cleaned.slice(0, 2)}) ${cleaned.slice(2, 6)}-${cleaned.slice(6)}`;
+    }
+    return `(${cleaned.slice(0, 2)}) ${cleaned.slice(2, 7)}-${cleaned.slice(7, 11)}`;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -145,6 +163,12 @@ const CriarConta: React.FC = () => {
 
     if (type === "checkbox") {
       setFormData((prev) => ({ ...prev, [name]: checked }));
+      if (name === "terms" && checked) {
+        setTermsError(false);
+        if (error === "Você precisa aceitar os termos de uso para continuar.") {
+          setError(null);
+        }
+      }
       return;
     }
 
@@ -153,32 +177,59 @@ const CriarConta: React.FC = () => {
       formattedValue = formatPhone(value);
     }
 
+    if (name === "password") {
+      if (value.length >= 6) {
+        setPasswordError(false);
+        if (error === "A senha deve ter pelo menos 6 caracteres.") {
+          setError(null);
+        }
+      }
+    }
+
     setFormData((prev) => ({ ...prev, [name]: formattedValue }));
+  };
+
+  const handlePasswordBlur = () => {
+    if (formData.password.length > 0 && formData.password.length < 6) {
+      setPasswordError(true);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
+    let hasError = false;
+
     if (!formData.name.trim() || !formData.surname.trim()) {
       setError("Por favor, preencha seu nome e sobrenome.");
-      return;
-    }
-
-    if (!formData.phone.replace(/\D/g, "") || formData.phone.replace(/\D/g, "").length < 10) {
-      setError("Por favor, insira um telefone válido.");
-      return;
+      hasError = true;
+    } else if (!formData.phone.replace(/\D/g, "") || formData.phone.replace(/\D/g, "").length < 10) {
+      setError("Por favor, insira um telefone válido com DDD.");
+      hasError = true;
     }
 
     if (!formData.password || formData.password.length < 6) {
-      setError("A senha deve ter pelo menos 6 caracteres.");
-      return;
+      setPasswordError(true);
+      if (!hasError) {
+        setError("A senha deve ter pelo menos 6 caracteres.");
+      }
+      hasError = true;
+    } else {
+      setPasswordError(false);
     }
 
     if (!formData.terms) {
-      setError("Você precisa aceitar os termos de uso para continuar.");
-      return;
+      setTermsError(true);
+      if (!hasError) {
+        setError("Você precisa aceitar os termos de uso para continuar.");
+      }
+      hasError = true;
+    } else {
+      setTermsError(false);
     }
+
+    if (hasError) return;
 
     setLoading(true);
 
@@ -470,15 +521,27 @@ const CriarConta: React.FC = () => {
           <a href="/" className="logo">
             <img src="/beasier-1-1-1@2x.png" alt="Gestão Boa" />
           </a>
-          <div className="plan-badge">
-            {planConfig.discount && <span className="discount-badge">{planConfig.discount}</span>}
-            <span className="plan-name">Plano {planConfig.name}</span>
-            <span className="plan-price">
-              {planConfig.originalPrice && (
-                <span className="original-price">{planConfig.originalPrice}</span>
-              )}
-              {planConfig.price}
-            </span>
+          <div className="header-actions">
+            <a
+              href={IOS_APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="app-store-header-btn"
+              title="Baixar app para iOS na App Store"
+            >
+              <AppleIcon width={16} height={16} />
+              <span>Baixar no iOS</span>
+            </a>
+            <div className="plan-badge">
+              {planConfig.discount && <span className="discount-badge">{planConfig.discount}</span>}
+              <span className="plan-name">Plano {planConfig.name}</span>
+              <span className="plan-price">
+                {planConfig.originalPrice && (
+                  <span className="original-price">{planConfig.originalPrice}</span>
+                )}
+                {planConfig.price}
+              </span>
+            </div>
           </div>
         </div>
       </header>
@@ -534,6 +597,26 @@ const CriarConta: React.FC = () => {
                 </div>
               </div>
             )}
+
+            <div className="app-download-box">
+              <div className="app-download-info">
+                <strong>Disponível para iPhone e iPad</strong>
+                <p>Baixe o aplicativo oficial na App Store</p>
+              </div>
+              <a
+                href={IOS_APP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="app-store-badge-btn"
+                title="Baixar na App Store"
+              >
+                <AppleIcon width={22} height={22} />
+                <div className="app-store-btn-labels">
+                  <span className="app-store-sub">Disponível na</span>
+                  <span className="app-store-main">App Store</span>
+                </div>
+              </a>
+            </div>
           </div>
 
           {/* Right Side - Form */}
@@ -549,7 +632,7 @@ const CriarConta: React.FC = () => {
                     <p>Preencha seus dados para começar</p>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="signup-form">
+                  <form onSubmit={handleSubmit} className="signup-form" noValidate>
                     <div className="form-row">
                       <div className="form-group">
                         <label htmlFor="name">Nome *</label>
@@ -580,12 +663,13 @@ const CriarConta: React.FC = () => {
                     <div className="form-group">
                       <label htmlFor="phone">Telefone / Celular *</label>
                       <input
-                        type="text"
+                        type="tel"
                         id="phone"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="(00) 00000-0000"
+                        maxLength={15}
                         required
                       />
                     </div>
@@ -598,30 +682,43 @@ const CriarConta: React.FC = () => {
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
+                        onBlur={handlePasswordBlur}
                         placeholder="Mínimo 6 caracteres"
+                        className={passwordError ? "input-error" : ""}
                         required
                       />
+                      {passwordError && (
+                        <span className="field-error-text">
+                          A senha deve ter pelo menos 6 caracteres.
+                        </span>
+                      )}
                     </div>
 
-                    <div className="checkbox-group">
-                      <input
-                        type="checkbox"
-                        id="terms"
-                        name="terms"
-                        checked={formData.terms}
-                        onChange={handleChange}
-                        required
-                      />
-                      <label htmlFor="terms">
-                        Li e concordo com os{" "}
-                        <a href="/terms" target="_blank" rel="noopener noreferrer">
-                          Termos de Uso
-                        </a>{" "}
-                        e{" "}
-                        <a href="/privacy" target="_blank" rel="noopener noreferrer">
-                          Política de Privacidade
-                        </a>
-                      </label>
+                    <div className="terms-wrapper">
+                      <div className={`checkbox-group ${termsError ? "checkbox-group-error" : ""}`}>
+                        <input
+                          type="checkbox"
+                          id="terms"
+                          name="terms"
+                          checked={formData.terms}
+                          onChange={handleChange}
+                        />
+                        <label htmlFor="terms">
+                          Li e concordo com os{" "}
+                          <a href="/terms" target="_blank" rel="noopener noreferrer">
+                            Termos de Uso
+                          </a>{" "}
+                          e{" "}
+                          <a href="/privacy" target="_blank" rel="noopener noreferrer">
+                            Política de Privacidade
+                          </a>
+                        </label>
+                      </div>
+                      {termsError && (
+                        <span className="terms-error-text">
+                          Você precisa aceitar os termos de uso para continuar.
+                        </span>
+                      )}
                     </div>
 
                     {error && <div className="error-message">{error}</div>}
@@ -730,9 +827,20 @@ const CriarConta: React.FC = () => {
               )}
             </div>
 
-            <p className="login-link">
-              Já tem uma conta? <a href="https://app.gestaoboa.com.br">Fazer login</a>
-            </p>
+            <div className="signup-bottom-links">
+              <p className="login-link">
+                Já tem uma conta? <a href="https://app.gestaoboa.com.br">Fazer login</a>
+              </p>
+              <a
+                href={IOS_APP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ios-app-link"
+              >
+                <AppleIcon width={16} height={16} />
+                <span>Baixar o App no iOS</span>
+              </a>
+            </div>
           </div>
         </div>
       </main>

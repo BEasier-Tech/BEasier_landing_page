@@ -18,6 +18,7 @@ const Influenciador: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
   // Animated counter hook
@@ -85,6 +86,10 @@ const Influenciador: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!acceptedTerms) {
+      setError('Você deve aceitar os termos para continuar.');
+      return;
+    }
     setLoading(true);
     setError('');
 
@@ -325,6 +330,7 @@ const Influenciador: React.FC = () => {
                     pix_key: '',
                     discount_code: '',
                   });
+                  setAcceptedTerms(false);
                 }}
               >
                 Cadastrar outro influenciador
@@ -400,6 +406,19 @@ const Influenciador: React.FC = () => {
                   <span className="code-hint">
                     Dica: use um código curto e fácil para seus seguidores lembrarem (ex: SEUNOME10).
                   </span>
+                </div>
+
+                <div className="checkbox-group">
+                  <input
+                    type="checkbox"
+                    id="accept-terms"
+                    checked={acceptedTerms}
+                    onChange={(e) => setAcceptedTerms(e.target.checked)}
+                    required
+                  />
+                  <label htmlFor="accept-terms">
+                    Aceitar <a href="/regulamento-indicacao" target="_blank" rel="noopener noreferrer">termos</a>
+                  </label>
                 </div>
 
                 {error && <div className="error-message">{error}</div>}

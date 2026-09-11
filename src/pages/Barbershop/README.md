@@ -1,5 +1,5 @@
 # Landing Page 7. **Preços**: Grid com os 3 planos principais e destaque para o mais popular
-8. **Teste Grátis**: 20 dias de teste gratuito sem cartãoBarbearia
+8. **Teste Grátis**: 10 dias de teste gratuito sem cartãoBarbearia
 
 ## Visão Geral
 
@@ -25,7 +25,7 @@ Esta é uma landing page especializada voltada para o segmento de barbearias, cr
 - **Plano Crescimento**: R$ 89,90/mês - 2 usuários (MAIS POPULAR)
 - **Plano Empresarial**: R$ 129,90/mês - Usuários ilimitados + Mentoria
 - **Descontos**: 24% anual, 15% semestral
-- **Teste Grátis**: 20 dias (sem cartão de crédito)
+- **Teste Grátis**: 10 dias (sem cartão de crédito)
 
 #### Depoimentos Autênticos:
 1. **Pedro Arthur** - Proprietário da Prime Barbershop

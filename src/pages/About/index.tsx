@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Header from "../../components/Header";
 import "./styles.css";
 
 const About = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     // Simple animation for elements with fade-in class
     const observer = new IntersectionObserver(
@@ -277,9 +279,7 @@ const About = () => {
             <div className="hero-buttons">
               <button
                 className="primary-button"
-                onClick={() =>
-                  window.open("https://app.gestaoboa.com.br", "_blank")
-                }
+                onClick={() => navigate("/criar-conta")}
               >
                 Testar grátis
               </button>
@@ -755,9 +755,7 @@ const About = () => {
           <div className="cta-buttons">
             <button
               className="cta-button primary"
-              onClick={() =>
-                window.open("https://beasier.vercel.app", "_blank")
-              }
+              onClick={() => navigate("/criar-conta")}
             >
               Teste Grátis
             </button>

@@ -3,6 +3,7 @@ import emailjs from "@emailjs/browser";
 import { FormHandles, SubmitHandler } from "@unform/core";
 import { Form } from "@unform/web";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ScrollSpy from "react-ui-scrollspy";
 import * as yup from "yup";
 import Button from "../../components/Button";
@@ -11,7 +12,6 @@ import CustomTextarea from "../../components/CustomTextArea";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import CookieConsentModal from "../../components/CookieConsentModal";
-import RoiCalculator from "../../components/RoiCalculator";
 import { UnformErrors } from "../../interfaces/interfaces";
 import { FB_PIXEL } from "../../utils/pixel";
 
@@ -37,12 +37,27 @@ import {
   InstagramSection,
   Segments,
   Solutions,
+  WhatsAppSection,
+  WhatsAppContent,
+  WhatsAppBadge,
+  WhatsAppHeading,
+  WhatsAppDescription,
+  WhatsAppCounter,
+  WhatsAppFeatures,
+  WhatsAppFeatureCard,
+  WhatsAppCTA,
+  WhatsAppMockupContainer,
+  WAChatMockup,
+  WAChatHeader,
+  WAChatBody,
+  WABubble,
 } from "./styles";
 
 // Import the carousel styles
 import "./performance.css";
 
 const Home: FunctionComponent = () => {
+  const navigate = useNavigate();
   const formRef = useRef<FormHandles>(null);
   const viewedSections = useRef(new Set<string>());
 
@@ -297,11 +312,11 @@ const Home: FunctionComponent = () => {
           </title>
           <meta
             name="description"
-            content="Sistema de Gestão completo: agendamentos, controle financeiro, CRM, estoque e comissões. Teste grátis por 20 dias!"
+            content="Sistema de Gestão completo com automação de WhatsApp: chatbot inteligente, lembretes automáticos, mensagens de aniversário, agendamentos, controle financeiro e CRM. +20.000 mensagens WhatsApp enviadas. Teste grátis por 10 dias!"
           />
           <meta
             name="keywords"
-            content="sistema de gestão, software de gestão, CRM, controle financeiro, agendamento online, gestão de estoque, comissões, gestão de clientes, ERP, sistema para pequenas e micros empresas"
+            content="sistema de gestão, software de gestão, CRM, controle financeiro, agendamento online, gestão de estoque, comissões, gestão de clientes, ERP, sistema para pequenas e micros empresas, automação whatsapp, chatbot whatsapp, lembrete whatsapp, mensagem automática whatsapp"
           />
           <meta name="author" content="Gestão Boa" />
           <meta name="robots" content="index, follow" />
@@ -315,7 +330,7 @@ const Home: FunctionComponent = () => {
           />
           <meta
             property="og:description"
-            content="Sistema de Gestão completo: agendamentos, controle financeiro, CRM, estoque e comissões. Teste grátis por 20 dias!"
+            content="Sistema de Gestão completo: agendamentos, controle financeiro, CRM, estoque e comissões. Teste grátis por 10 dias!"
           />
           <meta property="og:url" content="https://gestaoboa.com.br/" />
           <meta property="og:site_name" content="Gestão Boa" />
@@ -336,7 +351,7 @@ const Home: FunctionComponent = () => {
           />
           <meta
             name="twitter:description"
-            content="Sistema de Gestão completo: agendamentos, controle financeiro, CRM, estoque e comissões. Teste grátis por 20 dias!"
+            content="Sistema de Gestão completo: agendamentos, controle financeiro, CRM, estoque e comissões. Teste grátis por 10 dias!"
           />
           <meta
             name="twitter:image"
@@ -376,8 +391,8 @@ const Home: FunctionComponent = () => {
               </li>
               <li>
                 <a
-                  href="https://gestaoboa.com.br/preco"
-                  title="Teste gratuito por 20 dias"
+                  href="https://gestaoboa.com.br/criar-conta"
+                  title="Teste gratuito por 10 dias"
                 >
                   Teste Gratuito
                 </a>
@@ -411,24 +426,35 @@ const Home: FunctionComponent = () => {
 
           <Banner id="start">
             <div className="content">
-              <a href="/preco" className="badge-link">
+              <a
+                href="/criar-conta"
+                className="badge-link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/criar-conta");
+                }}
+              >
                 <HeroBadge>
                   <span className="emoji">⚡️</span>
-                  <span>Teste Grátis por 20 dias —</span>
+                  <span>Teste Grátis por 10 dias —</span>
                   <span className="highlight">Sem Cartão de Crédito</span>
                 </HeroBadge>
               </a>
               <h1 className="title">Gestão inteligente para o seu negócio</h1>
               <div className="subtitle">
-                Simplifique seus agendamentos e organize comissões com
-                facilidade. Gerencie tudo em um app e veja sua receita decolar!
+                Automatize seu WhatsApp com lembretes inteligentes, simplifique
+                agendamentos e organize comissões. Gerencie tudo em um app e veja sua receita decolar!
               </div>
 
               <div className="buttons">
                 <a
                   className="button button-link"
-                  href="/preco"
+                  href="/criar-conta"
                   title="TESTAR GRÁTIS"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/criar-conta");
+                  }}
                 >
                   <Button
                     width="100%"
@@ -594,21 +620,246 @@ const Home: FunctionComponent = () => {
                       height="28"
                       viewBox="0 0 24 24"
                       fill="none"
-                      stroke="#0077b6"
+                      stroke="#25d366"
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                     </svg>
                   </div>
-                  <div className="metric-value">90%</div>
-                  <div className="metric-label">Satisfação</div>
-                  <div className="metric-description">Clientes recomendam</div>
+                  <div className="metric-value">+20.000</div>
+                  <div className="metric-label">Mensagens WhatsApp</div>
+                  <div className="metric-description">
+                    Enviadas automaticamente
+                  </div>
                 </div>
+
               </div>
             </div>
 
+          </Solutions>
+
+          {/* ===== WHATSAPP HERO SECTION ===== */}
+          <WhatsAppSection id="whatsapp-automacao">
+            <div className="whatsapp-inner">
+              <WhatsAppContent>
+                <WhatsAppBadge>🤖 Automação WhatsApp — Nosso Diferencial</WhatsAppBadge>
+                <WhatsAppHeading>
+                  Seu negócio no <span>piloto automático</span> pelo WhatsApp
+                </WhatsAppHeading>
+                <WhatsAppDescription>
+                  O Gestão Boa envia mensagens automáticas pelo WhatsApp para seus clientes:
+                  lembretes de agendamento, feliz aniversário com cupom, aviso ao profissional e
+                  convite de retorno. Tudo sem você precisar digitar uma única mensagem.
+                </WhatsAppDescription>
+
+                <WhatsAppCounter>
+                  <div className="counter-number">+20.000</div>
+                  <div className="counter-label">
+                    mensagens WhatsApp<br />enviadas automaticamente
+                  </div>
+                </WhatsAppCounter>
+
+                <WhatsAppFeatures>
+                  <WhatsAppFeatureCard>
+                    <div className="feature-icon">⏰</div>
+                    <div className="feature-title">Lembrete de Agendamento</div>
+                    <div className="feature-desc">Cliente lembrado 1 dia antes. Reduza até 90% dos no-shows.</div>
+                  </WhatsAppFeatureCard>
+                  <WhatsAppFeatureCard>
+                    <div className="feature-icon">🎂</div>
+                    <div className="feature-title">Feliz Aniversário</div>
+                    <div className="feature-desc">Mensagem automática com cupom de desconto personalizado.</div>
+                  </WhatsAppFeatureCard>
+                  <WhatsAppFeatureCard>
+                    <div className="feature-icon">📣</div>
+                    <div className="feature-title">Aviso ao Profissional</div>
+                    <div className="feature-desc">Funcionário notificado na hora que um cliente agenda pelo site.</div>
+                  </WhatsAppFeatureCard>
+                  <WhatsAppFeatureCard>
+                    <div className="feature-icon">🔄</div>
+                    <div className="feature-title">Convite de Retorno</div>
+                    <div className="feature-desc">Re-engaje clientes que não visitam há tempo automaticamente.</div>
+                  </WhatsAppFeatureCard>
+                </WhatsAppFeatures>
+
+                <WhatsAppCTA
+                  href="/criar-conta"
+                  title="Quero automatizar meu WhatsApp"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/criar-conta");
+                  }}
+                >
+                  Quero automatizar meu WhatsApp →
+                </WhatsAppCTA>
+              </WhatsAppContent>
+
+              <WhatsAppMockupContainer>
+                <WAChatMockup>
+                  <div className="phone-notch" />
+                  <div className="phone-screen">
+                    <WAChatHeader>
+                      <div className="avatar">GB</div>
+                      <div className="info">
+                        <strong>Gestão Boa Bot 🤖</strong>
+                        <span>• Online agora</span>
+                      </div>
+                      <span className="bot-tag">Automático</span>
+                    </WAChatHeader>
+
+                    <WAChatBody>
+                      {/* Bubble 1: Lembrete de Agendamento */}
+                      <WABubble>
+                        <span className="bubble-badge">⏰ Lembrete de Horário</span>
+                        <div>
+                          Olá, <strong>Mariana</strong>! 💇‍♀️ Passando para lembrar do seu horário de{" "}
+                          <strong>Corte & Hidratação</strong> amanhã às <strong>14:30</strong> com o Bruno.
+                        </div>
+                        <div style={{ marginTop: "6px", fontSize: "0.82rem", color: "#0077b6", fontWeight: 600 }}>
+                          Responda <strong>1</strong> para confirmar ou <strong>2</strong> para reagendar.
+                        </div>
+                        <div className="time">
+                          10:30
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                      </WABubble>
+
+                      {/* Bubble 2: Resposta do Cliente */}
+                      <WABubble $outgoing>
+                        <div>1 - Confirmadíssimo! Até amanhã! ✨</div>
+                        <div className="time">
+                          10:32
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                      </WABubble>
+
+                      {/* Bubble 3: Feliz Aniversário */}
+                      <WABubble>
+                        <span
+                          className="bubble-badge"
+                          style={{
+                            background: "#fce7f3",
+                            color: "#be185d",
+                          }}
+                        >
+                          🎂 Feliz Aniversário!
+                        </span>
+                        <div>
+                          🎉 Parabéns, <strong>Mariana</strong>! Toda a equipe deseja um dia incrível!
+                          Preparamos um presente: use o cupom <strong>NIVER15</strong> e ganhe{" "}
+                          <strong>15% OFF</strong> no seu próximo procedimento! 🎁✨
+                        </div>
+                        <div className="time">
+                          09:00
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                      </WABubble>
+
+                      {/* Bubble 4: Aviso ao Profissional */}
+                      <WABubble>
+                        <span
+                          className="bubble-badge"
+                          style={{
+                            background: "#fef3c7",
+                            color: "#b45309",
+                          }}
+                        >
+                          📣 Novo Agendamento!
+                        </span>
+                        <div>
+                          Ei <strong>Bruno</strong>! 🙌 Novo agendamento confirmado: <strong>Mariana Silva</strong>{" "}
+                          — <strong>Corte & Hidratação</strong> amanhã às <strong>14:30</strong>.
+                        </div>
+                        <div className="time">
+                          10:33
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                      </WABubble>
+                    </WAChatBody>
+                  </div>
+                </WAChatMockup>
+              </WhatsAppMockupContainer>
+            </div>
+          </WhatsAppSection>
+
+          {/* Segments Section */}
+          <Segments id="segments">
+            <h2 className="section-title">Segmentos que Atendemos</h2>
+            <p className="section-subtitle">
+              Oferecemos soluções especializadas para diferentes tipos de
+              negócios de beleza e bem-estar
+            </p>
+
+            <div className="carousel-container">
+              {/* Botão anterior */}
+              <button
+                className="carousel-btn carousel-btn-prev"
+                onClick={prevSegment}
+                aria-label="Segmento anterior"
+              >
+                ‹
+              </button>
+
+              {/* Container dos cards visíveis */}
+              <div className="carousel-track">
+                {getVisibleSegments().map((segment, index) => (
+                  <div
+                    key={currentSegmentIndex + index}
+                    className="carousel-card"
+                  >
+                    <img
+                      src={segment.image}
+                      alt={segment.alt}
+                      className="segment-image"
+                    />
+                    <h3 className="segment-title">{segment.title}</h3>
+                    <p className="segment-description">{segment.description}</p>
+                    <ul className="segment-features">
+                      {segment.features.map((feature, featureIndex) => (
+                        <li key={featureIndex}>{feature}</li>
+                      ))}
+                    </ul>
+                    <a href={segment.link} className="segment-link">
+                      {segment.linkText}
+                    </a>
+                  </div>
+                ))}
+              </div>
+
+              {/* Botão próximo */}
+              <button
+                className="carousel-btn carousel-btn-next"
+                onClick={handleNextSegment}
+                aria-label="Próximo segmento"
+              >
+                ›
+              </button>
+            </div>
+
+            {/* Indicadores de posição */}
+            <div className="carousel-indicators">
+              {Array.from(
+                { length: Math.ceil(segments.length / itemsPerPage) },
+                (_, pageIndex) => (
+                  <button
+                    key={pageIndex}
+                    className={`carousel-indicator ${
+                      Math.floor(currentSegmentIndex / itemsPerPage) ===
+                      pageIndex
+                        ? "active"
+                        : ""
+                    }`}
+                    onClick={() => goToSegment(pageIndex * itemsPerPage)}
+                    aria-label={`Ir para página ${pageIndex + 1}`}
+                  />
+                )
+              )}
+            </div>
+          </Segments>
+
+          <Solutions>
             {/* Benefícios / Soluções */}
             <div className="benefits-section">
               <h2 className="benefits-title">
@@ -818,13 +1069,14 @@ const Home: FunctionComponent = () => {
                     </svg>
                   </div>
                   <div className="benefit-content">
-                    <h3 className="benefit-title">Lembretes WhatsApp</h3>
+                    <h3 className="benefit-title">Automação WhatsApp Completa</h3>
                     <p className="benefit-description">
-                      Funcionário avisado quando cliente agenda pelo site.
-                      Cliente lembrado 1 dia antes do corte.
+                      Lembretes de agendamento, feliz aniversário com cupom,
+                      aviso ao profissional e convite de retorno — tudo 100%
+                      automático pelo WhatsApp. +20.000 mensagens já enviadas.
                     </p>
                     <a
-                      href="/solucao#lembretes-whatsapp"
+                      href="#whatsapp-automacao"
                       className="benefit-link"
                     >
                       Saiba mais →
@@ -900,8 +1152,12 @@ const Home: FunctionComponent = () => {
             <div className="try-free-button-container">
               <a
                 className="try-free-button"
-                href="/preco"
+                href="/criar-conta"
                 title="EXPERIMENTE GRATUITAMENTE"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/criar-conta");
+                }}
               >
                 <Button
                   width="100%"
@@ -921,6 +1177,7 @@ const Home: FunctionComponent = () => {
                 <video
                   controls
                   preload="metadata"
+                  playsInline
                   poster="/leandro-thumbnail.jpg"
                   onPlay={() =>
                     FB_PIXEL.trackCustomEvent("VideoPlay", {
@@ -959,6 +1216,8 @@ const Home: FunctionComponent = () => {
                 <video
                   controls
                   preload="metadata"
+                  playsInline
+                  poster="/lucas-thumbnail.jpg"
                   onPlay={() =>
                     FB_PIXEL.trackCustomEvent("VideoPlay", {
                       video: "fala_do_lucas",
@@ -1214,7 +1473,9 @@ const Home: FunctionComponent = () => {
                     <div className="or">ou</div>
 
                     <a
-                      href="https://app.gestaoboa.com.br"
+                      href="https://apps.apple.com/br/app/gest%C3%A3o-boa/id6741593872"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="unfocused"
                       onClick={() => trackAppDownload("iOS")}
                     >
@@ -1280,87 +1541,11 @@ const Home: FunctionComponent = () => {
             </div>
           </Solutions>
 
-          <RoiCalculator />
-
-          {/* Segments Section */}
-          <Segments id="segments">
-            <h2 className="section-title">Segmentos que Atendemos</h2>
-            <p className="section-subtitle">
-              Oferecemos soluções especializadas para diferentes tipos de
-              negócios de beleza e bem-estar
-            </p>
-
-            <div className="carousel-container">
-              {/* Botão anterior */}
-              <button
-                className="carousel-btn carousel-btn-prev"
-                onClick={prevSegment}
-                aria-label="Segmento anterior"
-              >
-                ‹
-              </button>
-
-              {/* Container dos cards visíveis */}
-              <div className="carousel-track">
-                {getVisibleSegments().map((segment, index) => (
-                  <div
-                    key={currentSegmentIndex + index}
-                    className="carousel-card"
-                  >
-                    <img
-                      src={segment.image}
-                      alt={segment.alt}
-                      className="segment-image"
-                    />
-                    <h3 className="segment-title">{segment.title}</h3>
-                    <p className="segment-description">{segment.description}</p>
-                    <ul className="segment-features">
-                      {segment.features.map((feature, featureIndex) => (
-                        <li key={featureIndex}>{feature}</li>
-                      ))}
-                    </ul>
-                    <a href={segment.link} className="segment-link">
-                      {segment.linkText}
-                    </a>
-                  </div>
-                ))}
-              </div>
-
-              {/* Botão próximo */}
-              <button
-                className="carousel-btn carousel-btn-next"
-                onClick={handleNextSegment}
-                aria-label="Próximo segmento"
-              >
-                ›
-              </button>
-            </div>
-
-            {/* Indicadores de posição */}
-            <div className="carousel-indicators">
-              {Array.from(
-                { length: Math.ceil(segments.length / itemsPerPage) },
-                (_, pageIndex) => (
-                  <button
-                    key={pageIndex}
-                    className={`carousel-indicator ${
-                      Math.floor(currentSegmentIndex / itemsPerPage) ===
-                      pageIndex
-                        ? "active"
-                        : ""
-                    }`}
-                    onClick={() => goToSegment(pageIndex * itemsPerPage)}
-                    aria-label={`Ir para página ${pageIndex + 1}`}
-                  />
-                )
-              )}
-            </div>
-          </Segments>
 
           <PlansCTA>
             <h2 className="cta-title">Escolha o plano ideal para o seu negócio</h2>
             <p className="cta-text">
-              Planos sem fidelidade ou taxas de cancelamento. Teste gratuitamente por 20 dias e comprove!
+              Planos sem fidelidade ou taxas de cancelamento. Teste gratuitamente por 10 dias e comprove!
             </p>
             <a href="/preco" className="cta-button" title="Ver Planos e Preços">
               Conhecer Nossos Planos & Preços ➔
@@ -1414,7 +1599,7 @@ const Home: FunctionComponent = () => {
                   necessidade do seu negócio, começando em R$ 69,90 e indo até
                   R$ 159,90 por mês. Todos os planos incluem as funcionalidades
                   essenciais para uma gestão de ponta. E você pode experimentar
-                  gratuitamente por 20 dias, sem necessidade de cartão de
+                  gratuitamente por 10 dias, sem necessidade de cartão de
                   crédito!
                 </p>
               </details>
@@ -1443,6 +1628,22 @@ const Home: FunctionComponent = () => {
                   seguros com certificação SSL e backup automático diário. Seus
                   dados são protegidos por protocolos de segurança bancária e
                   nunca são compartilhados com terceiros.
+                </p>
+              </details>
+
+              <details className="faq-item">
+                <summary>
+                  Como funciona a automação de WhatsApp?
+                </summary>
+                <p>
+                  O Gestão Boa possui um chatbot inteligente que envia mensagens
+                  automáticas pelo WhatsApp para seus clientes. Você pode
+                  configurar: lembretes de agendamento (enviados 1 dia antes),
+                  mensagens de feliz aniversário com cupom de desconto
+                  personalizado, aviso ao profissional quando um cliente agenda
+                  pelo site, e convites de retorno para clientes que não
+                  visitam há tempo. Já enviamos mais de 20.000 mensagens
+                  automáticas pela plataforma!
                 </p>
               </details>
             </div>

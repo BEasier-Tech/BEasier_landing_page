@@ -112,12 +112,15 @@
   border: 2px solid #e0e0e0;
   border-radius: 12px;
   font-size: 16px;
+  background-color: #ffffff;
+  color: #1a1a1a;
   transition: border-color 0.2s ease;
   box-sizing: border-box;
 }
 
 .company-input:focus {
   outline: none;
+  background-color: #ffffff;
   border-color: #007bff;
 }
 

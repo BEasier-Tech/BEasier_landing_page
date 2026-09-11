@@ -155,11 +155,14 @@ input[type="password"] {
   border: 1px solid #ced4da;
   border-radius: 6px;
   font-size: 16px;
+  background-color: #ffffff;
+  color: #1a1a1a;
   transition: border-color 0.3s;
 }
 
 input:focus {
   outline: none;
+  background-color: #ffffff;
   border-color: #03045e;
   box-shadow: 0 0 0 2px rgba(3, 4, 94, 0.1);
 }

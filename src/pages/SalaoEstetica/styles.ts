@@ -1350,3 +1350,414 @@ export const FloatingMobileCTA = styled.div`
     }
   }
 `;
+
+// =============================================
+// WHATSAPP SECTION - SALÃO & ESTÉTICA
+// =============================================
+
+const countPulse = keyframes`
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+`;
+
+const floatAnimation = keyframes`
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+`;
+
+export const WhatsAppSection = styled.section`
+  width: 100%;
+  background: linear-gradient(180deg, #faf8f5 0%, #f0f7ff 50%, #ffffff 100%);
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(124, 199, 232, 0.12) 0%, transparent 70%);
+    top: -150px;
+    right: -100px;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+    bottom: -100px;
+    left: -100px;
+    border-radius: 50%;
+    filter: blur(50px);
+    pointer-events: none;
+  }
+
+  .whatsapp-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 960px) {
+    padding: 60px 16px;
+    .whatsapp-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+`;
+
+export const WhatsAppContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  @media (max-width: 960px) {
+    text-align: center;
+    align-items: center;
+  }
+`;
+
+export const WhatsAppBadge = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(29, 86, 192, 0.08);
+  border: 1px solid rgba(29, 86, 192, 0.2);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1d56c0;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+`;
+
+export const WhatsAppHeading = styled.h2`
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #0b1d3d;
+  line-height: 1.18;
+  margin: 0;
+  letter-spacing: -0.02em;
+
+  span {
+    background: linear-gradient(90deg, #1d56c0 0%, #7cc7e8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 2.1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.7rem;
+  }
+`;
+
+export const WhatsAppDescription = styled.p`
+  font-size: 1.08rem;
+  color: #4a5568;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 530px;
+
+  @media (max-width: 960px) {
+    max-width: 100%;
+  }
+`;
+
+export const WhatsAppCounter = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  padding: 14px 22px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(11, 29, 61, 0.06);
+  width: fit-content;
+  animation: ${countPulse} 4s ease-in-out infinite;
+
+  .counter-number {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #1d56c0;
+    letter-spacing: -0.5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .counter-label {
+    font-size: 0.9rem;
+    color: #4a5568;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+
+  @media (max-width: 480px) {
+    .counter-number {
+      font-size: 1.8rem;
+    }
+    .counter-label {
+      font-size: 0.82rem;
+    }
+  }
+`;
+
+export const WhatsAppFeatures = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 4px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const WhatsAppFeatureCard = styled.div`
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 16px rgba(11, 29, 61, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  &:hover {
+    background: #ffffff;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px -8px rgba(29, 86, 192, 0.12);
+    border-color: rgba(29, 86, 192, 0.3);
+  }
+
+  .feature-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: rgba(29, 86, 192, 0.08);
+    border: 1px solid rgba(29, 86, 192, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+  }
+
+  &:hover .feature-icon {
+    background: #1d56c0;
+    border-color: #1d56c0;
+    transform: scale(1.06);
+  }
+
+  .feature-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #0b1d3d;
+    margin-bottom: 4px;
+  }
+
+  .feature-desc {
+    font-size: 0.82rem;
+    color: #64748b;
+    line-height: 1.5;
+  }
+`;
+
+export const WhatsAppCTA = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #0b1d3d 0%, #1d56c0 100%);
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 16px 34px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(11, 29, 61, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  width: fit-content;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(29, 86, 192, 0.35);
+    filter: brightness(1.08);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.95rem;
+    padding: 14px 24px;
+  }
+`;
+
+export const WhatsAppMockupContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: ${floatAnimation} 6s ease-in-out infinite;
+
+  @media (max-width: 960px) {
+    order: -1;
+  }
+`;
+
+export const WAChatMockup = styled.div`
+  width: 100%;
+  max-width: 380px;
+  background: #0b1d3d;
+  border-radius: 38px;
+  padding: 16px 8px 12px;
+  box-shadow: 0 25px 60px -15px rgba(11, 29, 61, 0.22),
+    0 0 0 1px rgba(212, 175, 55, 0.2);
+  border: 3px solid #1a2f55;
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  text-align: left;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 35px 80px -15px rgba(11, 29, 61, 0.3);
+  }
+
+  .phone-notch {
+    width: 75px;
+    height: 12px;
+    background: #000000;
+    border-radius: 10px;
+    margin: 0 auto 12px;
+  }
+
+  .phone-screen {
+    border-radius: 26px;
+    overflow: hidden;
+    background: #efeae2;
+  }
+`;
+
+export const WAChatHeader = styled.div`
+  background: #008069;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #008069;
+    font-weight: 800;
+    font-size: 1.05rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .info {
+    flex: 1;
+
+    strong {
+      display: block;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.75rem;
+      color: #d1fae5;
+    }
+  }
+
+  .bot-tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+`;
+
+export const WAChatBody = styled.div`
+  background: #efeae2;
+  background-image: radial-gradient(#d1d7db 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+  padding: 1.15rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+`;
+
+export const WABubble = styled.div<{ $outgoing?: boolean }>`
+  max-width: 90%;
+  align-self: ${(props) => (props.$outgoing ? "flex-end" : "flex-start")};
+  background: ${(props) => (props.$outgoing ? "#d9fdd3" : "#ffffff")};
+  color: #111b21;
+  padding: 0.75rem 0.95rem 0.55rem;
+  border-radius: ${(props) =>
+    props.$outgoing ? "14px 14px 2px 14px" : "14px 14px 14px 2px"};
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  font-size: 0.86rem;
+  line-height: 1.45;
+  position: relative;
+
+  .bubble-badge {
+    display: inline-block;
+    background: ${(props) =>
+      props.$outgoing ? "rgba(29, 86, 192, 0.1)" : "rgba(29, 86, 192, 0.1)"};
+    color: #1d56c0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .time {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.68rem;
+    color: #667781;
+    margin-top: 5px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+      color: #53bdeb;
+    }
+  }
+`;

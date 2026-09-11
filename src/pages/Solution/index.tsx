@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -6,6 +7,7 @@ import { Container, Content } from "./styles";
 import "../../styles/feature-animations.css";
 
 const Solution = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     // Função para fazer scroll suave para a seção
     const scrollToSection = () => {
@@ -83,7 +85,7 @@ const Solution = () => {
         </title>
         <meta
           name="description"
-          content="Melhor app de agendamentos e gestão financeira do Brasil! Sistema completo para organizar agenda, controlar finanças, CRM e estoque. Link personalizado de agendamentos incluído! Teste grátis 20 dias!"
+          content="Melhor app de agendamentos e gestão financeira do Brasil! Sistema completo para organizar agenda, controlar finanças, CRM e estoque. Link personalizado de agendamentos incluído! Teste grátis 10 dias!"
         />
         <meta
           name="keywords"
@@ -668,11 +670,18 @@ const Solution = () => {
           </h2>
           <p>
             Junte-se aos diversos empresários que já usam nosso app para
-            organizar agendamentos e controlar as finanças. Teste grátis por 20
+            organizar agendamentos e controlar as finanças. Teste grátis por 10
             dias!
           </p>
           <div className="buttons">
-            <a href="/preco" className="primary-button shine-effect">
+            <a
+              href="/criar-conta"
+              className="primary-button shine-effect"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/criar-conta");
+              }}
+            >
               Testar App Grátis
             </a>
             <a
