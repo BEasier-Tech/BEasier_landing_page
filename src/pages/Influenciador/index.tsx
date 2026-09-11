@@ -83,23 +83,6 @@ const Influenciador: React.FC = () => {
     }));
   };
 
-  // Gerador automático de código de desconto amigável
-  const handleGenerateCode = () => {
-    let base = formData.name
-      .trim()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toUpperCase()
-      .replace(/[^A-Z0-9]/g, '');
-    if (!base) {
-      base = 'GB';
-    }
-    // Adiciona número randômico de 2 dígitos
-    const randomSuffix = Math.floor(10 + Math.random() * 90);
-    const suggestedCode = `${base.slice(0, 8)}${randomSuffix}`;
-    setFormData((prev) => ({ ...prev, discount_code: suggestedCode }));
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -406,26 +389,16 @@ const Influenciador: React.FC = () => {
 
                 <div className="form-group">
                   <label>Código de Desconto (Cupom) *</label>
-                  <div className="code-input-container">
-                    <input
-                      type="text"
-                      name="discount_code"
-                      placeholder="EX: CARLOS10"
-                      value={formData.discount_code}
-                      onChange={handleChange}
-                      required
-                    />
-                    <button
-                      type="button"
-                      className="btn-generate-code"
-                      onClick={handleGenerateCode}
-                      title="Gerar código baseado no seu nome"
-                    >
-                      ⚡ Gerar Código
-                    </button>
-                  </div>
+                  <input
+                    type="text"
+                    name="discount_code"
+                    placeholder="EX: CARLOS10"
+                    value={formData.discount_code}
+                    onChange={handleChange}
+                    required
+                  />
                   <span className="code-hint">
-                    Dica: use um código curto e fácil para seus seguidores lembrarem (ex: SEUNOME10) ou clique em "Gerar Código".
+                    Dica: use um código curto e fácil para seus seguidores lembrarem (ex: SEUNOME10).
                   </span>
                 </div>
 
